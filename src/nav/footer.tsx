@@ -7,8 +7,10 @@ import DarkTheme from '@themes/darkTheme.json'
 
 export default function Footer({ state, descriptors, navigation }: FooterProps): 
 JSX.Element {
+
     const isDark = useColorScheme() === 'dark'
     const theme = isDark ? DarkTheme : LightTheme
+
     return (
         <View style={{...FooterStyles.content, backgroundColor: theme.darker}}>
             {state.routes.map((route: RouteProp<RootStackParamList, any>, 
@@ -20,7 +22,7 @@ JSX.Element {
                 const isFocused = state.index === index
                 
                 // Emitt the normal tab events
-                const onPress = () => {
+                function onPress() {
                     const event = navigation.emit({
                         type: "tabPress",
                         target: route.key,
@@ -28,15 +30,14 @@ JSX.Element {
                     })
 
                     if (!isFocused && !event.defaultPrevented) {
-                        // The `merge: true` option makes sure that the
-                        // params inside the tab screen are preserved
-                        navigation.navigate(route.name, {merge: true})
+                        // Preserves params inside the tab screen
+                        navigation.navigate(route.name, { merge: true })
                     }
                 }
 
                 if (!options.focusedIcon || !options.icon) return
 
-                const onLongPress = () => {
+                function onLongPress() {
                     navigation.emit({
                         type: "tabLongPress",
                         target: route.key,

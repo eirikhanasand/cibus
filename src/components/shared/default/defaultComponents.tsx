@@ -1,6 +1,5 @@
 import { StatusBar, Text, useColorScheme, View } from 'react-native'
 import DefaultStyles from '@components/shared/default/defaultComponentStyles'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
 import LightTheme from '@themes/lightTheme.json'
 import type { PropsWithChildren } from 'react'
 import DarkTheme from '@themes/darkTheme.json'
@@ -15,7 +14,7 @@ type CardProps = PropsWithChildren<{
     title?: string
 }>
 
-export default function CustomStatusBar(): JSX.Element {
+export default function Statusbar(): JSX.Element {
     const isDark = useColorScheme() === 'dark'
     const theme = isDark ? DarkTheme : LightTheme
 

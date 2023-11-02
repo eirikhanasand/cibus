@@ -10,8 +10,8 @@ export default function LandingHeader(): JSX.Element {
     const { login } = useSelector((state: ReduxState) => state.login)
     const isDark = useColorScheme() === 'dark'
     const theme = isDark ? DarkTheme : LightTheme
-    const ageLimit = require("@assets/18.png")
-    const logo = require("@assets/cibusnbg.png")
+    const globe = require("@assets/globe.png")
+    const logo = require("@assets/cibus.png")
     const gobackLogo = require("@assets/goback777.png")
     const Name = name.length > 12 ? `${name.slice(0, 12)}...` : name
 
@@ -59,7 +59,7 @@ export default function LandingHeader(): JSX.Element {
                         <Text style={{ ...HeaderStyles.logo, color: theme.contrast }}>
                             Cibus
                         </Text>
-                        <Image style={HeaderStyles.menu} source={ageLimit} />
+                        <Image style={HeaderStyles.menu} source={globe} />
                     </>
                     : <>
                         <View style={{flexDirection: "row"}}>
@@ -68,7 +68,7 @@ export default function LandingHeader(): JSX.Element {
                                 Welcome, {Name}!
                             </Text>
                         </View>
-                        <Image style={HeaderStyles.menuWithItems} source={ageLimit} />
+                        <Image style={HeaderStyles.menuWithItems} source={globe} />
                     </>
                 }
             </View>

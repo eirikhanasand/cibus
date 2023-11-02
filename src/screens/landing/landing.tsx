@@ -1,14 +1,13 @@
-import { SafeAreaView, useColorScheme, Text, ScrollView } from 'react-native'
-import { LandingStyles } from "@screens/landing/landingStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
-import Relevant from '@components/landing/relevant'
-import { Section } from '@components/shared/default/defaultComponents'
-import Welcome from '@components/landing/welcome'
-import LightTheme from '@themes/lightTheme.json'
 import DarkTheme from '@themes/darkTheme.json'
-import Games from '@components/landing/games'
-import { LandingScreenProps } from '@interfaces'
 import en from "@text/landing.json"
+import Games from '@components/landing/games'
+import LightTheme from '@themes/lightTheme.json'
+import Relevant from '@components/landing/relevant'
+import { LandingScreenProps } from '@interfaces'
+import { LandingStyles } from "@screens/landing/landingStyles"
+import { SafeAreaView, useColorScheme, Text, ScrollView } from 'react-native'
+import { Section } from '@components/shared/default/defaultComponents'
 
 export default function LandingScreen({ navigation }: LandingScreenProps): JSX.Element {
     const isDark = useColorScheme() === 'dark'
@@ -21,7 +20,6 @@ export default function LandingScreen({ navigation }: LandingScreenProps): JSX.E
             }}>
             <CustomStatusBar />
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Welcome />
                 <Section title="PLAY">
                     <Text style={{color: theme.contrast}}>{en.play}</Text>
                 </Section>

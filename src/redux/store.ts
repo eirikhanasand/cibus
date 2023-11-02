@@ -4,20 +4,22 @@ import { persistReducer } from "redux-persist"
 import AnimateReducer from "./slices/animate"
 import NameReducer from "./slices/name"
 import LoginReducer from "./slices/login"
+import LangReducer from "./slices/lang"
 import thunk from "redux-thunk"
 
 // Combines all reducers
 const reducers = combineReducers({
     animate: AnimateReducer,
     name: NameReducer,
-    login: LoginReducer
+    login: LoginReducer,
+    lang: LangReducer
 })
 
 // Declares key and storage to store the redux states in, and whitelists states
 const saveState = {
     key: "root",
     storage: AsyncStorage,
-    whitelist: ["animate", "name", "login"]
+    whitelist: ["animate", "name", "login", "lang"]
 }
 
 // Persistor to remember the state

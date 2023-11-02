@@ -38,6 +38,9 @@ type ReduxState = {
         login: boolean
         displayLogin: boolean
     }
+    lang: {
+        lang: boolean
+    }
 }
 
 type PurchasedGames = {
