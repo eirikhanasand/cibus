@@ -1,16 +1,14 @@
 import { FooterProps } from '@interfaces'
 import { RouteProp } from '@react-navigation/native'
 import { View, Image, TouchableOpacity, useColorScheme } from 'react-native'
-import { FooterStyles } from '@nav/footerStyles'
+import FooterStyles from '@nav/footerStyles'
 import LightTheme from '@themes/lightTheme.json'
 import DarkTheme from '@themes/darkTheme.json'
 
 export default function Footer({ state, descriptors, navigation }: FooterProps): 
 JSX.Element {
-
     const isDark = useColorScheme() === 'dark'
     const theme = isDark ? DarkTheme : LightTheme
-
     return (
         <View style={{...FooterStyles.content, backgroundColor: theme.darker}}>
             {state.routes.map((route: RouteProp<RootStackParamList, any>, 
@@ -30,8 +28,9 @@ JSX.Element {
                     })
 
                     if (!isFocused && !event.defaultPrevented) {
-                        // Preserves params inside the tab screen
-                        navigation.navigate(route.name, { merge: true })
+                        // The `merge: true` option makes sure that the
+                        // params inside the tab screen are preserved
+                        navigation.navigate(route.name, {merge: true})
                     }
                 }
 

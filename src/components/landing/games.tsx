@@ -20,14 +20,14 @@ export default function Games({navigation}: ScreenProps): JSX.Element {
     dispatch(setAnimate(true))
     
     return (
-        <Card title="GAMES">
+        <Card title="Clothes">
             <GameContent 
-                titles={["LOTTERY", "SPORT"]}
+                titles={["Sweaters", "Pants"]}
                 theme={theme} 
                 navigation={navigation}
             />
             <GameContent 
-                titles={["CELEBRITIES", "WEATHER", "ALL GAMES"]} 
+                titles={["Shoes", "Shirts", "All clothes"]} 
                 theme={theme}
                 navigation={navigation}
             />

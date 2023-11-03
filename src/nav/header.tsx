@@ -1,19 +1,22 @@
 import { Image, Text, TouchableOpacity, View, useColorScheme } from "react-native"
-import { HeaderStyles } from "@nav/headerStyles"
+import HeaderStyles from "@nav/headerStyles"
 import LightTheme from '@themes/lightTheme.json'
 import DarkTheme from '@themes/darkTheme.json'
 import { useNavigation, useRoute } from "@react-navigation/native"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { setLang } from "@redux/slices/lang"
+import { setTheme } from "@redux/slices/theme"
 
-export default function LandingHeader(): JSX.Element {
+type IconValue = "globe" | "theme"
+
+export default function Header(): JSX.Element {
     const { name } = useSelector((state: ReduxState) => state.name)
     const { login } = useSelector((state: ReduxState) => state.login)
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
-    const globe = require("@assets/globe.png")
     const logo = require("@assets/cibus.png")
     const gobackLogo = require("@assets/goback777.png")
     const Name = name.length > 12 ? `${name.slice(0, 12)}...` : name
+    const isDark = useColorScheme() === 'dark'
+    const theme = isDark ? DarkTheme : LightTheme
 
     // Get the navigation object
     const navigation = useNavigation()
@@ -59,7 +62,7 @@ export default function LandingHeader(): JSX.Element {
                         <Text style={{ ...HeaderStyles.logo, color: theme.contrast }}>
                             Cibus
                         </Text>
-                        <Image style={HeaderStyles.menu} source={globe} />
+                        <HeaderIcons />
                     </>
                     : <>
                         <View style={{flexDirection: "row"}}>
@@ -68,10 +71,52 @@ export default function LandingHeader(): JSX.Element {
                                 Welcome, {Name}!
                             </Text>
                         </View>
-                        <Image style={HeaderStyles.menuWithItems} source={globe} />
+                        <HeaderIcons />
                     </>
                 }
             </View>
         </View>
+    )
+}
+
+/**
+ * Renders all icons of the header
+ */
+function HeaderIcons() {
+    return (
+        <View style={HeaderStyles.headerRow}>
+            <HeaderIcon type="theme" />
+            <HeaderIcon type="globe" />
+        </View>
+    )
+}
+
+/**
+ * Renders icon of the header
+ * @param {string} type globe or theme 
+ */
+function HeaderIcon({type}: {type: IconValue}) {
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const dispatch = useDispatch()
+    const globe = require("@assets/globe.png")
+    const globeLight = require("@assets/globelight.png")
+    const sun = require("@assets/sun.png")
+    const moon = require("@assets/moon.png")
+    const isDark = useColorScheme() === 'dark'
+    const langIcon = isDark ? globeLight : globe
+    const themeIcon = isDark ? sun : moon
+    const icon = type === "globe" ? langIcon : themeIcon
+
+    function handlePress() {
+        type === "globe" ? dispatch(setLang()) : dispatch(setTheme())
+    }
+
+    return (
+        <TouchableOpacity onPress={handlePress}>
+            <View>
+                <Image style={HeaderStyles.menu} source={icon} />
+                {type === "globe" && <Text>{lang ? "en" : "no"}</Text>}
+            </View>
+        </TouchableOpacity>
     )
 }

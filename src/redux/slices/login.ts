@@ -26,7 +26,7 @@ export const LoginSlice = createSlice({
     }
 })
 
-// Exports reducers
+// Exports the change function
 export const { setLogin, setLogout, setDisplayLogin } = LoginSlice.actions
 
 // Exports the language slice

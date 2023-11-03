@@ -2,23 +2,22 @@ import { createSlice } from "@reduxjs/toolkit"
 
 // Declares Lang Slice
 export const LangSlice = createSlice({
-    // Slice name
     name: "lang",
-    // Initial state
     initialState: {
-        // true for Norwegian, false for English
+        // true for norwegian, false for English
         lang: true,
     },
     // Declares reducers
     reducers: {
-        setLang(state, action) {
-            state.lang = action.payload
+        // Function to change lang
+        setLang(state) {
+            state.lang = !state.lang
         },
     }
 })
 
-// Exports reducers
+// Exports the change function
 export const { setLang } = LangSlice.actions
 
-// Exports the language slice
+// Exports the lang slice
 export default LangSlice.reducer

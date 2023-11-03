@@ -24,3 +24,5 @@ export const FooterStyles = StyleSheet.create({
         justifyContent: "center"
     }
 })
+
+export default FooterStyles

@@ -14,7 +14,7 @@ type CardProps = PropsWithChildren<{
     title?: string
 }>
 
-export default function Statusbar(): JSX.Element {
+export default function CustomStatusBar(): JSX.Element {
     const isDark = useColorScheme() === 'dark'
     const theme = isDark ? DarkTheme : LightTheme
 

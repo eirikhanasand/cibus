@@ -4,9 +4,10 @@ export const HeaderStyles = StyleSheet.create({
     // Menu icon in header
     menu: {
         width: 35,
+        height: 35,
         aspectRatio: 1/1,
         alignSelf: 'center',
-        left: -20
+        left: -20,
     },
     menuWithItems: {
         width: 35,
@@ -49,3 +50,5 @@ export const HeaderStyles = StyleSheet.create({
         justifyContent: "space-between",
     }
 })
+
+export default HeaderStyles

@@ -15,12 +15,12 @@ export default function PlayScreen({ route, navigation }: PlayScreenProps): JSX.
 
     // Scrolls to the location of the category (1200 is the bottom)
     switch (category) {
-        case "ALL CLOTHES":
-        case "SHOES": scrollToPosition(0); break;
-        case "PANTS": scrollToPosition(270); break;
-        case "SHRITS": scrollToPosition(610); break;
-        case "SWEATHERS": scrollToPosition(1200); break;
-        case "ABC": scrollToPosition(1200); break;
+        case "ALL GAMES":
+        case "LOTTERY":         scrollToPosition(0);    break;
+        case "SPORT":           scrollToPosition(270);  break;
+        case "CELEBRITIES":     scrollToPosition(610);  break;
+        case "WEATHER":         scrollToPosition(1200); break;
+        case "ENTERTAINMENT":   scrollToPosition(1200); break;
     }
 
     function scrollToPosition(y: number) {

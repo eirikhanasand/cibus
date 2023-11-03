@@ -10,14 +10,15 @@ import Games from '@components/landing/games'
 import { LandingScreenProps } from '@interfaces'
 
 export default function LandingScreen({ navigation }: LandingScreenProps): JSX.Element {
+    
     const isDark = useColorScheme() === 'dark'
     const theme = isDark ? DarkTheme : LightTheme
 
     return (
         <SafeAreaView style={{
-                ...LandingStyles.content, 
-                backgroundColor: theme.content
-            }}>
+            ...LandingStyles.content, 
+            backgroundColor: theme.content
+        }}>
             <CustomStatusBar />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Welcome />
