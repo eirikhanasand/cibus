@@ -1,6 +1,4 @@
-import DarkTheme from "@themes/dark"
-import lightTheme from "@themes/light"
-import { Text, View, useColorScheme } from "react-native"
+import { Text, View } from "react-native"
 import { useSelector } from "react-redux"
 import AdStyles from "./adStyles"
 
@@ -16,8 +14,7 @@ type RowProps = {
 export default function Ad() {
     // const { ad } = useSelector((state: ReduxState) => state.ad)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : lightTheme
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const ad = {
         title: "Overskrift",
@@ -49,8 +46,7 @@ export default function Ad() {
 function Contact() {
     // const { ad } = useSelector((state: ReduxState) => state.ad)
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : lightTheme
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     const ad = {
         title: "Overskrift",
@@ -65,7 +61,7 @@ function Contact() {
 
     return (
         <View style={{backgroundColor: theme.darker, margin: 10, marginTop: 0, padding: 10, borderRadius: 10}}>
-            <Text style={{color: 'white', fontSize: 20, marginBottom: 10}}>{lang ? "Selger" : "Seller"}:</Text>
+            <Text style={{color: theme.contrast, fontSize: 20, marginBottom: 10, fontWeight: "600"}}>{lang ? "Selger" : "Seller"}:</Text>
             <Row left="ID" right={`${ad.seller.id}`} />
             <Row left={lang ? "Navn" : "Name"} right={`${ad.seller.name}`} />
             <Row left={lang ? "Tlf" : "Phon"} right={`${ad.seller.phone}`} />
@@ -74,8 +70,7 @@ function Contact() {
 }
 
 function Row({left, right}: RowProps) {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : lightTheme
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <View style={AdStyles.rowView}>

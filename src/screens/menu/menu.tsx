@@ -1,13 +1,10 @@
-import { SafeAreaView, useColorScheme, Text, ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView } from 'react-native'
 import { MenuStyles } from "@screens/menu/menuStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
-import { ScreenProps } from "@interfaces"
+import { useSelector } from 'react-redux'
 
 export default function MenuScreen(): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <SafeAreaView style={{

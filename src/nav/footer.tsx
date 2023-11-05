@@ -1,14 +1,12 @@
 import { FooterProps } from '@interfaces'
 import { RouteProp } from '@react-navigation/native'
-import { View, Image, TouchableOpacity, useColorScheme } from 'react-native'
+import { View, Image, TouchableOpacity } from 'react-native'
 import FooterStyles from '@nav/footerStyles'
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
+import { useSelector } from 'react-redux'
 
 export default function Footer({ state, descriptors, navigation }: FooterProps): 
 JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     return (
         <View style={{...FooterStyles.content, backgroundColor: theme.darker}}>
             {state.routes.map((route: RouteProp<RootStackParamList, any>, 

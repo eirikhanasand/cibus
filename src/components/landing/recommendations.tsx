@@ -1,7 +1,5 @@
-import { Image, ScrollView, Text, TouchableOpacity, View, useColorScheme } from "react-native"
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import RecommendationStyles from "@components/landing/recommendationStyles"
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
 import { ScreenProps } from "@interfaces"
 import { useSelector } from "react-redux"
 
@@ -10,9 +8,8 @@ import { useSelector } from "react-redux"
  * @returns Relevant section
  */
 export default function Recommendations({navigation}: ScreenProps): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     // Images available
     const images = [
@@ -43,8 +40,7 @@ export default function Recommendations({navigation}: ScreenProps): JSX.Element 
                 horizontal={true} 
                 showsHorizontalScrollIndicator={false}
             >
-                {images.map((image) => {
-                    return (
+                {images.map((image) => (
                         // Navigates to the PlayScreen with the proper category
                         <TouchableOpacity key={image.name} onPress={() => {
                             navigation.navigate("PlayScreen", {category: image.name})
@@ -60,8 +56,7 @@ export default function Recommendations({navigation}: ScreenProps): JSX.Element 
                                 />
                             </View>
                         </TouchableOpacity>
-                    )
-                })}
+                ))}
             </ScrollView>
         </View>
     )

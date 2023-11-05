@@ -1,22 +1,18 @@
 import AdStyles from "@components/landing/adStyles"
-import { Text, TouchableOpacity, View, useColorScheme } from "react-native"
+import { Text, TouchableOpacity, View } from "react-native"
 import { Card } from "@components/shared/default/defaultComponents"
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
 import { Navigation, ScreenProps } from "@interfaces"
 import { useDispatch, useSelector } from "react-redux"
 import { setAnimate } from "@redux/slices/animate"
+import { useNavigation } from "@react-navigation/native"
 
 type AdContentProps = {
     titles: string[]
-    theme: ThemeProps
-    navigation: Navigation
 }
 
-export default function Ads({navigation}: ScreenProps): JSX.Element {
+export default function Ads(): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+    const navigation: Navigation = useNavigation()
     const titlesNO = {
         two: ["Gensere", "Bukser"],
         three: ["Sko", "T-skjorter", "Alle klær"]
@@ -31,21 +27,16 @@ export default function Ads({navigation}: ScreenProps): JSX.Element {
     
     return (
         <Card title={lang ? "Klær" : "Clothes"}>
-            <AdContent 
-                titles={titles.two}
-                theme={theme} 
-                navigation={navigation}
-            />
-            <AdContent 
-                titles={titles.three} 
-                theme={theme}
-                navigation={navigation}
-            />
+            <AdContent titles={titles.two} />
+            <AdContent titles={titles.three} />
         </Card>
     )
 }
 
-function AdContent({theme, titles, navigation}: AdContentProps): JSX.Element {
+function AdContent({titles}: AdContentProps): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const navigation: Navigation = useNavigation()
+
     if (titles.length === 3) {
         return (
             <View style={AdStyles.viewThree}>

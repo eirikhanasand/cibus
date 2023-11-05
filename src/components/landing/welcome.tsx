@@ -1,7 +1,5 @@
-import { Text, TextInput, TouchableOpacity, View, useColorScheme } from "react-native"
+import { Text, TextInput, TouchableOpacity, View } from "react-native"
 import WelcomeStyles from "./welcomeStyles"
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setDisplayLogin, setLogin } from "@redux/slices/login"
@@ -11,18 +9,11 @@ import { setName } from "@redux/slices/name"
 type SignupProps = {
     signup: boolean
     setSignup: React.Dispatch<React.SetStateAction<boolean>>
-    theme: ThemeProps
-}
-
-// Props for the Login component
-type LoginProps = {
-    theme: ThemeProps
 }
 
 // Props for the default screen
 type DefaultScreenProps = {
     setSignup: React.Dispatch<React.SetStateAction<boolean>>
-    theme: ThemeProps
     signup: boolean
 }
 
@@ -34,21 +25,20 @@ export default function Welcome() {
     const { login } = useSelector((state: ReduxState) => state.login)
 
     const [signup, setSignup] = useState(false)
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
 
     return(
         <View style={login ? WelcomeStyles.viewTwoLogin : WelcomeStyles.viewTwo}>
-            <DefaultScreen signup={signup} setSignup={setSignup} theme={theme} />
-            <Signup signup={signup} setSignup={setSignup} theme={theme} />
-            <Login theme={theme} />
+            <DefaultScreen signup={signup} setSignup={setSignup} />
+            <Signup signup={signup} setSignup={setSignup} />
+            <Login />
         </View>
     )
 }
 
-function DefaultScreen({signup, setSignup, theme}: DefaultScreenProps) {
+function DefaultScreen({signup, setSignup}: DefaultScreenProps) {
     const { login, displayLogin } = useSelector((state: ReduxState) => state.login)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
 
     if (signup || displayLogin || login) return <></>
@@ -85,9 +75,10 @@ function DefaultScreen({signup, setSignup, theme}: DefaultScreenProps) {
  * Component for rendering the signup button in the welcome section
  * @returns Signup button
  */
-function Signup({signup, setSignup, theme}: SignupProps) {
+function Signup({signup, setSignup}: SignupProps) {
     const { name } = useSelector((state: ReduxState) => state.name)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
     const [password, setPassword] = useState("")
     const [birthdate, setBirthdate] = useState("")
@@ -169,9 +160,10 @@ function Signup({signup, setSignup, theme}: SignupProps) {
  * Component for rendering the login button in the welcome section
  * @returns login button
  */
-function Login({theme}: LoginProps): JSX.Element {
+function Login(): JSX.Element {
     const { name } = useSelector((state: ReduxState) => state.name)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const { login, displayLogin } = useSelector((state: ReduxState) => state.login)
     const dispatch = useDispatch()
     const [password, setPassword] = useState("")

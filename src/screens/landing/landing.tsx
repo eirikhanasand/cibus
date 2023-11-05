@@ -1,16 +1,13 @@
-import { SafeAreaView, useColorScheme, ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView } from 'react-native'
 import { LandingStyles } from "@screens/landing/landingStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
 import Relevant from '@components/landing/relevant'
 import Welcome from '@components/landing/welcome'
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
 import Ads from '@components/landing/ads'
-import { LandingScreenProps } from '@interfaces'
+import { useSelector } from 'react-redux'
 
-export default function LandingScreen({ navigation }: LandingScreenProps): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+export default function LandingScreen(): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <SafeAreaView style={{
@@ -20,8 +17,8 @@ export default function LandingScreen({ navigation }: LandingScreenProps): JSX.E
             <CustomStatusBar />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Welcome />
-                <Ads navigation={navigation} />
-                <Relevant navigation={navigation} />
+                <Ads />
+                <Relevant />
             </ScrollView>
         </SafeAreaView>
     )

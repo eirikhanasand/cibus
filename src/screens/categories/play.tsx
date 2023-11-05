@@ -1,15 +1,12 @@
-import { SafeAreaView, useColorScheme, ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView } from 'react-native'
 import { PlayStyles } from "@screens/categories/playStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
 import { PlayScreenProps } from "@interfaces"
-import Play from '@components/categories/categories'
 import { useRef } from 'react'
+import { useSelector } from 'react-redux'
 
-export default function PlayScreen({ route, navigation }: PlayScreenProps): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+export default function PlayScreen({ route }: PlayScreenProps): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const { category } = route.params
     const scrollViewRef = useRef<ScrollView | null>(null)
 

@@ -5,7 +5,7 @@ export const BookmarkSlice = createSlice({
     name: "bookmarks",
     initialState: {
         // Bookmarks
-        bookmarks: [] as Bookmark[]
+        bookmarks: [] as number[]
     },
     // Declares reducers
     reducers: {
@@ -19,5 +19,5 @@ export const BookmarkSlice = createSlice({
 // Exports the change function
 export const { setBookmarks } = BookmarkSlice.actions
 
-// Exports the lang slice
+// Exports the bookmark slice
 export default BookmarkSlice.reducer

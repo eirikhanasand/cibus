@@ -1,7 +1,5 @@
-import { Image, Text, TouchableOpacity, View, useColorScheme } from "react-native"
+import { Image, Text, TouchableOpacity, View } from "react-native"
 import HeaderStyles from "@nav/headerStyles"
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { setLang } from "@redux/slices/lang"
@@ -13,11 +11,10 @@ type IconValue = "globe" | "theme"
 export default function Header(): JSX.Element {
     const { name } = useSelector((state: ReduxState) => state.name)
     const { login } = useSelector((state: ReduxState) => state.login)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const logo = require("@assets/cibus.png")
     const gobackLogo = require("@assets/goback777.png")
     const Name = name.length > 12 ? `${name.slice(0, 12)}...` : name
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
 
     // Get the navigation object
     const navigation = useNavigation()
@@ -96,15 +93,14 @@ function HeaderIcons() {
  */
 function HeaderIcon({type}: {type: IconValue}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme, value } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
     const globe = require("@assets/globe.png")
     const globeLight = require("@assets/globelight.png")
     const sun = require("@assets/sun.png")
     const moon = require("@assets/moon.png")
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
-    const langIcon = isDark ? globeLight : globe
-    const themeIcon = isDark ? sun : moon
+    const langIcon = value ? globeLight : globe
+    const themeIcon = value ? sun : moon
     const icon = type === "globe" ? langIcon : themeIcon
 
     function handlePress() {

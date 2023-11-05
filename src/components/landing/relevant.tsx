@@ -1,18 +1,17 @@
-import { Image, ScrollView, Text, TouchableOpacity, View, useColorScheme } from "react-native"
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import RelevantStyles from "@components/landing/relevantStyles"
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
-import { ScreenProps } from "@interfaces"
+import { Navigation } from "@interfaces"
 import { useSelector } from "react-redux"
+import { useNavigation } from "@react-navigation/native"
 
 /**
  * JSX Element containing the sport images with text found on the landing screen.
  * @returns Relevant section
  */
-export default function Relevant({navigation}: ScreenProps): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+export default function Relevant(): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
+    const navigation: Navigation = useNavigation()
 
     // Images available
     const images = [
@@ -43,8 +42,7 @@ export default function Relevant({navigation}: ScreenProps): JSX.Element {
                 horizontal={true} 
                 showsHorizontalScrollIndicator={false}
             >
-                {images.map((image) => {
-                    return (
+                {images.map((image) => (
                         // Navigates to the PlayScreen with the proper category
                         <TouchableOpacity key={image.name} onPress={() => {
                             navigation.navigate("PlayScreen", {category: image.name})
@@ -60,8 +58,7 @@ export default function Relevant({navigation}: ScreenProps): JSX.Element {
                                 />
                             </View>
                         </TouchableOpacity>
-                    )
-                })}
+                ))}
             </ScrollView>
         </View>
     )

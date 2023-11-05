@@ -1,17 +1,14 @@
-import { TextInput, useColorScheme } from "react-native";
+import { TextInput } from "react-native";
 import filterStyles from "./filterStyles"
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "@redux/slices/search";
-import DarkTheme from "@themes/dark"
-import LightTheme from "@themes/light"
 
 export default function Filter() {
     const textInputRef = useRef<TextInput | null>(null)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
 
     return (
         <TextInput

@@ -9,6 +9,9 @@ import thunk from "redux-thunk"
 import LangReducer from "./slices/lang"
 import AdReducer from "./slices/ad"
 import CategoryReducer from "./slices/categories"
+import BookmarkReducer from "./slices/bookmarks"
+import CartReducer from "./slices/cart"
+import SearchReducer from "./slices/search"
 
 // Combines all reducers
 const reducers = combineReducers({
@@ -18,14 +21,17 @@ const reducers = combineReducers({
     lang: LangReducer,
     theme: ThemeReducer,
     ad: AdReducer,
-    category: CategoryReducer
+    category: CategoryReducer,
+    bookmarks: BookmarkReducer,
+    cart: CartReducer,
+    search: SearchReducer
 })
 
 // Declares key and storage to store the redux states in, and whitelists states
 const saveState = {
     key: "root",
     storage: AsyncStorage,
-    whitelist: ["animate", "name", "login", "theme", "lang", "search", "ad", "category"]
+    whitelist: ["animate", "name", "login", "theme", "lang", "search", "ad", "category", "bookmarks", "cart"]
 }
 
 // Persistor to remember the state

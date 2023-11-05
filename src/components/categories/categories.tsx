@@ -1,8 +1,6 @@
 import CategoryStyles from "@components/categories/categoryStyles"
-import { Text, TouchableOpacity, View, useColorScheme } from "react-native"
+import { Text, TouchableOpacity, View } from "react-native"
 import { Card } from "@components/shared/default/defaultComponents"
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
 import { Navigation } from "@interfaces"
 import React, { useEffect, useState } from "react"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
@@ -11,17 +9,13 @@ import { setAnimate } from "@redux/slices/animate"
 
 type AdContentProps = {
     titles: string[]
-    theme: ThemeProps
 }
 
 type AdProps = {
     title: string
-    theme: ThemeProps
 }
 
 export default function CategoryScreen(): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
     const [color, setColor] = useState("")
     const { animate } = useSelector((state: ReduxState) => state.animate)
     const { category } = useSelector((state: ReduxState) => state.category)
@@ -55,7 +49,6 @@ export default function CategoryScreen(): JSX.Element {
                 >
                     <CategoryContent
                         titles={category.subcategories}
-                        theme={theme}
                     />
                 </Card>
                 ))}
@@ -63,15 +56,15 @@ export default function CategoryScreen(): JSX.Element {
     )
 }
 
-function CategoryContent({theme, titles}: AdContentProps): JSX.Element {
+function CategoryContent({titles}: AdContentProps): JSX.Element {
     return (
         <>
             {titles.map((title, index) => {
                 if (index % 2 == 0) {
                     return (
                         <View key={title} style={CategoryStyles.viewTwo}>
-                            <Ad theme={theme} title={title} />
-                            <Ad theme={theme} title={titles[index+1]} />
+                            <Ad title={title} />
+                            <Ad title={titles[index+1]} />
                         </View>
                     )
                 }
@@ -80,7 +73,8 @@ function CategoryContent({theme, titles}: AdContentProps): JSX.Element {
     )
 }
 
-function Ad({theme, title}: AdProps) {
+function Ad({title}: AdProps) {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
     const navigation: Navigation = useNavigation()
     const dispatch = useDispatch()
 

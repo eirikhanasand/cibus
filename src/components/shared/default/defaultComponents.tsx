@@ -1,9 +1,8 @@
-import { StatusBar, Text, useColorScheme, View } from 'react-native'
+import { StatusBar, Text, View } from 'react-native'
 import DefaultStyles from '@components/shared/default/defaultComponentStyles'
-import LightTheme from '@themes/light'
 import type { PropsWithChildren } from 'react'
-import DarkTheme from '@themes/dark'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 type SectionProps = PropsWithChildren<{
     title: string
@@ -15,12 +14,11 @@ type CardProps = PropsWithChildren<{
 }>
 
 export default function CustomStatusBar(): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+    const { theme, value } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <StatusBar
-            barStyle={isDark ? 'light-content' : 'dark-content'}
+            barStyle={value ? 'light-content' : 'dark-content'}
             backgroundColor={theme.darker}
         />
     )
@@ -33,8 +31,7 @@ export default function CustomStatusBar(): JSX.Element {
  * @returns Styled outline
  */
 export function Card({children, color, title}: CardProps): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return(
         <View style={{
@@ -52,8 +49,7 @@ export function Card({children, color, title}: CardProps): JSX.Element {
 }
 
 export function Section({children, title}: SectionProps): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <Card>

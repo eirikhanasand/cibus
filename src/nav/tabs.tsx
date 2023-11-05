@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import LandingScreen from '@screens/landing/landing'
 import StatsScreen from '@screens/stats/stats'
-import { ImageProps, useColorScheme } from "react-native"
+import { ImageProps } from "react-native"
 import MenuScreen from '@screens/menu/menu'
 import PlayScreen from '@screens/categories/play'
 import { TabOptions } from '@interfaces'
@@ -23,7 +23,7 @@ const Tab = createBottomTabNavigator()
 
 export default function Navigator(): JSX.Element {
     const { name } = useSelector((state: ReduxState) => state.name)
-    const isDark = useColorScheme() === 'dark'
+    const { value } = useSelector((state: ReduxState) => state.theme)
     const [login, setLogin] = useState(false)
     
     const screens = [
@@ -32,7 +32,7 @@ export default function Navigator(): JSX.Element {
             name: "LandingScreen",
             component: LandingScreen,
             focusedIcon: require("@assets/house-green.png"),
-            icon: isDark
+            icon: value
                 ? require("@assets/house.png")
                 : require("@assets/house.png")
         },
@@ -40,7 +40,7 @@ export default function Navigator(): JSX.Element {
             name: "PlayScreen",
             component: PlayScreen,
             focusedIcon: require("@assets/plus-green.png"),
-            icon: isDark
+            icon: value
                 ? require("@assets/plus.png")
                 : require("@assets/plus.png")
         },
@@ -49,7 +49,7 @@ export default function Navigator(): JSX.Element {
             login: login,
             component: StatsScreen,
             focusedIcon: require("@assets/stats-green.png"),
-            icon: isDark
+            icon: value
                 ? require("@assets/stats.png")
                 : require("@assets/stats.png")
         },
@@ -58,7 +58,7 @@ export default function Navigator(): JSX.Element {
             login: login,
             component: MenuScreen,
             focusedIcon: require("@assets/menu-green.png"),
-            icon: isDark
+            icon: value
                 ? require("@assets/menu.png")
                 : require("@assets/menu.png")
         },

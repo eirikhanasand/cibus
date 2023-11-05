@@ -1,9 +1,9 @@
-const lightTheme = {
-    content: "#90C2E7",
-    card: "#4E8098",
-    darker: "#121619",
-    contrast: "#fff",
-    green: "#09814a"
+const LightTheme = {
+    content: "white",
+    card: "#deceb2",
+    darker: "#c8ad7f",
+    contrast: "black",
+    green: "#c8ad7f"
 }
 
-export default lightTheme
+export default LightTheme

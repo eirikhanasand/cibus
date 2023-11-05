@@ -1,16 +1,10 @@
-import { SafeAreaView, useColorScheme, ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView } from 'react-native'
 import { StatsStyles } from "@screens/stats/statsStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
-import LightTheme from '@themes/light'
-import DarkTheme from '@themes/dark'
-import { ScreenProps } from "@interfaces"
-import Header from '@nav/header'
-import Footer from '@nav/footer'
-import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
-export default function StatsScreen({ navigation }: ScreenProps): JSX.Element {
-    const isDark = useColorScheme() === 'dark'
-    const theme = isDark ? DarkTheme : LightTheme
+export default function StatsScreen(): JSX.Element {
+    const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
         <SafeAreaView style={{

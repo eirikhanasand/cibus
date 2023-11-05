@@ -40,7 +40,7 @@ type ReduxState = {
         displayLogin: boolean
     }
     theme: {
-        value: boolean,
+        value: boolean
         theme: Theme
     }
     lang: {
@@ -51,14 +51,17 @@ type ReduxState = {
     }
     ad: {
         ad: Ad
+        ads: Ad[]
     }
     category: {
         category: Category
     }
-}
-
-type Bookmark = {
-    id: number
+    bookmarks: {
+        bookmarks: number[]
+    }
+    cart: {
+        cart: number[]
+    }
 }
 
 type Ad = {

@@ -2,7 +2,7 @@
  * Fetches and returns all ads
  * @returns Ads
  */
-export default async function fetchAds(): Promise<number[][] | undefined> {
+export default async function fetchAds(): Promise<Ad[] | undefined> {
 
     try {
         const response = await fetch("http://localhost:3000/ads")
