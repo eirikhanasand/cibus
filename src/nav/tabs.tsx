@@ -1,19 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import LandingScreen from '@screens/landing/landing'
 import StatsScreen from '@screens/stats/stats'
 import { ImageProps, useColorScheme } from "react-native"
 import MenuScreen from '@screens/menu/menu'
-import PlayScreen from '@screens/play/play'
+import PlayScreen from '@screens/categories/play'
 import { TabOptions } from '@interfaces'
 import Footer from "@nav/footer"
 import { useState } from 'react'
-import LuckspinScreen from '@screens/play/gameScreens/lottery/luckspin/luckspin'
 import Header from '@nav/header'
 import React from "react"
-import DefaultScreen from '@screens/play/gameScreens/lottery/default/default'
-import JackpotScreen from '@screens/play/gameScreens/lottery/jackpot/jackpot'
 import { useSelector } from 'react-redux'
+import AdScreen from '@screens/ad/ad'
 
 type TabProps = {
     name: string
@@ -30,6 +27,7 @@ export default function Navigator(): JSX.Element {
     const [login, setLogin] = useState(false)
     
     const screens = [
+        { name: "AdScreen", component: AdScreen },
         {
             name: "LandingScreen",
             component: LandingScreen,
@@ -64,9 +62,6 @@ export default function Navigator(): JSX.Element {
                 ? require("@assets/menu.png")
                 : require("@assets/menu.png")
         },
-        { name: "LuckspinScreen", component: LuckspinScreen },
-        { name: "DefaultScreen", component: DefaultScreen },
-        { name: "JackpotScreen", component: JackpotScreen }
     ]
 
     return (
@@ -84,20 +79,18 @@ export default function Navigator(): JSX.Element {
                 insets={props.insets} 
             />}
         >
-            {screens.map((screen: TabProps) => {
-                return (
-                    <Tab.Screen 
-                        key={screen.name} 
-                        options={({
-                            display: true,
-                            focusedIcon: screen.focusedIcon,
-                            icon: screen.icon,
-                        }) as TabOptions}
-                        name={screen.name}
-                        children={(props) => <screen.component {...props} />}
-                    />
-                )
-            })}
+            {screens.map((screen: TabProps) => (
+                <Tab.Screen 
+                    key={screen.name} 
+                    options={({
+                        display: true,
+                        focusedIcon: screen.focusedIcon,
+                        icon: screen.icon,
+                    }) as TabOptions}
+                    name={screen.name}
+                    children={(props) => <screen.component {...props} />}
+                />
+            ))}
         </Tab.Navigator>
     )
 }

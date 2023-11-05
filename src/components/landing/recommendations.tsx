@@ -1,5 +1,5 @@
 import { Image, ScrollView, Text, TouchableOpacity, View, useColorScheme } from "react-native"
-import RelevantStyles from "@components/landing/relevantStyles"
+import RecommendationStyles from "@components/landing/recommendationStyles"
 import LightTheme from '@themes/lightTheme'
 import DarkTheme from '@themes/darkTheme'
 import { ScreenProps } from "@interfaces"
@@ -9,7 +9,7 @@ import { useSelector } from "react-redux"
  * JSX Element containing the sport images with text found on the landing screen.
  * @returns Relevant section
  */
-export default function Relevant({navigation}: ScreenProps): JSX.Element {
+export default function Recommendations({navigation}: ScreenProps): JSX.Element {
     const isDark = useColorScheme() === 'dark'
     const theme = isDark ? DarkTheme : LightTheme
     const { lang } = useSelector((state: ReduxState) => state.lang)
@@ -35,8 +35,8 @@ export default function Relevant({navigation}: ScreenProps): JSX.Element {
     ]
 
     return (
-        <View style={RelevantStyles.content}>
-            <Text style={{...RelevantStyles.title, color: theme.contrast}}>
+        <View style={RecommendationStyles.content}>
+            <Text style={{...RecommendationStyles.title, color: theme.contrast}}>
                 Relevant
             </Text>
             <ScrollView 
@@ -49,13 +49,13 @@ export default function Relevant({navigation}: ScreenProps): JSX.Element {
                         <TouchableOpacity key={image.name} onPress={() => {
                             navigation.navigate("PlayScreen", {category: image.name})
                         }}>
-                            <View style={RelevantStyles.imageView}>
-                                <Text style={RelevantStyles.imageText}>
+                            <View style={RecommendationStyles.imageView}>
+                                <Text style={RecommendationStyles.imageText}>
                                     {image.name}
                                 </Text>
-                                <Text style={RelevantStyles.imageTextOpacity} />
+                                <Text style={RecommendationStyles.imageTextOpacity} />
                                 <Image 
-                                    style={RelevantStyles.image}
+                                    style={RecommendationStyles.image}
                                     source={image.icon} 
                                 />
                             </View>

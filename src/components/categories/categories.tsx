@@ -1,37 +1,33 @@
-import PlayStyles from "@components/play/playStyles"
+import CategoryStyles from "@components/categories/categoryStyles"
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native"
 import { Card } from "@components/shared/default/defaultComponents"
-import LightTheme from '@themes/lightTheme.json'
-import DarkTheme from '@themes/darkTheme.json'
-import { Navigation, ScreenProps } from "@interfaces"
-import text from "@text/play/play.json"
+import LightTheme from '@themes/lightTheme'
+import DarkTheme from '@themes/darkTheme'
+import { Navigation } from "@interfaces"
 import React, { useEffect, useState } from "react"
-import { useFocusEffect } from "@react-navigation/native"
+import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { setAnimate } from "@redux/slices/animate"
 
-type GameContentProps = {
+type AdContentProps = {
     titles: string[]
     theme: ThemeProps
-    navigation: Navigation
 }
 
-type GameProps = {
+type AdProps = {
     title: string
     theme: ThemeProps
-    navigation: Navigation
 }
 
-interface PlayComponentProps extends ScreenProps {
-    category: string
-}
-
-export default function Play({navigation, category}: PlayComponentProps): JSX.Element {
+export default function CategoryScreen(): JSX.Element {
     const isDark = useColorScheme() === 'dark'
     const theme = isDark ? DarkTheme : LightTheme
     const [color, setColor] = useState("")
     const { animate } = useSelector((state: ReduxState) => state.animate)
+    const { category } = useSelector((state: ReduxState) => state.category)
     const dispatch = useDispatch()
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const categories = lang ? category.categories_no :category.categories_en
 
     useFocusEffect(() => {
         if (animate) {
@@ -51,16 +47,15 @@ export default function Play({navigation, category}: PlayComponentProps): JSX.El
     }, [category])
 
     return (
-        <View style={PlayStyles.content}>
-            {text.games.map((game) => (
-                    <Card 
-                    key={game.category}
-                    title={game.category} 
-                    color={category === game.category.toUpperCase() ? color : ""}>
-                    <PlayContent
-                        titles={game.titles}
+        <View style={CategoryStyles.content}>
+            {categories.map((category) => (
+                <Card 
+                    key={category.title}
+                    title={category.title} 
+                >
+                    <CategoryContent
+                        titles={category.subcategories}
                         theme={theme}
-                        navigation={navigation}
                     />
                 </Card>
                 ))}
@@ -68,15 +63,15 @@ export default function Play({navigation, category}: PlayComponentProps): JSX.El
     )
 }
 
-function PlayContent({theme, titles, navigation}: GameContentProps): JSX.Element {
+function CategoryContent({theme, titles}: AdContentProps): JSX.Element {
     return (
         <>
             {titles.map((title, index) => {
                 if (index % 2 == 0) {
                     return (
-                        <View key={title} style={PlayStyles.viewTwo}>
-                            <Game theme={theme} title={title} navigation={navigation} />
-                            <Game theme={theme} title={titles[index+1]} navigation={navigation} />
+                        <View key={title} style={CategoryStyles.viewTwo}>
+                            <Ad theme={theme} title={title} />
+                            <Ad theme={theme} title={titles[index+1]} />
                         </View>
                     )
                 }
@@ -85,7 +80,8 @@ function PlayContent({theme, titles, navigation}: GameContentProps): JSX.Element
     )
 }
 
-function Game({theme, title, navigation}: GameProps) {
+function Ad({theme, title}: AdProps) {
+    const navigation: Navigation = useNavigation()
     const dispatch = useDispatch()
 
     function handleClick() {
@@ -106,12 +102,12 @@ function Game({theme, title, navigation}: GameProps) {
             key={title}
             onPress={handleClick}
             style={{
-                ...PlayStyles.touchableTwo, 
+                ...CategoryStyles.touchableTwo, 
                 backgroundColor: theme.green
             }}
         >
             <Text key={title} style={{
-                ...PlayStyles.textTwo, 
+                ...CategoryStyles.textTwo, 
                 color: theme.contrast, 
                 backgroundColor: theme.green
             }}>

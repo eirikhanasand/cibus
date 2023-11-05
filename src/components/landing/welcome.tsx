@@ -1,7 +1,7 @@
 import { Text, TextInput, TouchableOpacity, View, useColorScheme } from "react-native"
 import WelcomeStyles from "./welcomeStyles"
-import LightTheme from '@themes/lightTheme.json'
-import DarkTheme from '@themes/darkTheme.json'
+import LightTheme from '@themes/lightTheme'
+import DarkTheme from '@themes/darkTheme'
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setDisplayLogin, setLogin } from "@redux/slices/login"
@@ -48,6 +48,7 @@ export default function Welcome() {
 
 function DefaultScreen({signup, setSignup, theme}: DefaultScreenProps) {
     const { login, displayLogin } = useSelector((state: ReduxState) => state.login)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
 
     if (signup || displayLogin || login) return <></>
@@ -62,7 +63,7 @@ function DefaultScreen({signup, setSignup, theme}: DefaultScreenProps) {
                     color: theme.contrast, 
                     backgroundColor: theme.green
                 }}>
-                    Sign up
+                    {lang ? "Register deg" : "Sign up"}
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity 
@@ -73,7 +74,7 @@ function DefaultScreen({signup, setSignup, theme}: DefaultScreenProps) {
                     color: theme.contrast, 
                     backgroundColor: theme.green
                 }}>
-                    Login
+                    {lang ? "Logg inn" : "Login"}
                 </Text>
             </TouchableOpacity>
         </View>
@@ -86,6 +87,7 @@ function DefaultScreen({signup, setSignup, theme}: DefaultScreenProps) {
  */
 function Signup({signup, setSignup, theme}: SignupProps) {
     const { name } = useSelector((state: ReduxState) => state.name)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
     const [password, setPassword] = useState("")
     const [birthdate, setBirthdate] = useState("")
@@ -116,7 +118,7 @@ function Signup({signup, setSignup, theme}: SignupProps) {
                     backgroundColor: theme.darker,
                     color: theme.green
                 }}
-                placeholder = {"Username"}
+                placeholder = {lang ? "Brukernavn" : "Username"}
                 placeholderTextColor={theme.card}
                 textAlign="center"
                 onChangeText={inputUsername}
@@ -128,7 +130,7 @@ function Signup({signup, setSignup, theme}: SignupProps) {
                     backgroundColor: theme.darker,
                     color: theme.green
                 }}
-                placeholder={"Date of birth (DDMMYY)"}
+                placeholder={lang ? "Fødselsdato (DDMMYY)" : "Date of birth (DDMMYY)"}
                 placeholderTextColor={theme.card}
                 textAlign="center"
                 inputMode="numeric"
@@ -142,7 +144,7 @@ function Signup({signup, setSignup, theme}: SignupProps) {
                     backgroundColor: theme.darker,
                     color: theme.green
                 }}
-                placeholder = {"Password"}
+                placeholder = {lang ? "Passord" : "Password"}
                 placeholderTextColor={theme.card}
                 textAlign="center"
                 secureTextEntry={true}
@@ -156,7 +158,7 @@ function Signup({signup, setSignup, theme}: SignupProps) {
                     color: theme.contrast, 
                     backgroundColor: theme.green
                 }}>
-                    Sign up
+                    {lang ? "Register deg" : "Sign up"}
                 </Text>
             </TouchableOpacity>
         </View>
@@ -169,6 +171,7 @@ function Signup({signup, setSignup, theme}: SignupProps) {
  */
 function Login({theme}: LoginProps): JSX.Element {
     const { name } = useSelector((state: ReduxState) => state.name)
+    const { lang } = useSelector((state: ReduxState) => state.lang)
     const { login, displayLogin } = useSelector((state: ReduxState) => state.login)
     const dispatch = useDispatch()
     const [password, setPassword] = useState("")
@@ -199,7 +202,7 @@ function Login({theme}: LoginProps): JSX.Element {
                     backgroundColor: theme.darker,
                     color: theme.green
                 }}
-                placeholder = {"Username"}
+                placeholder = {lang ? "Brukernavn" : "Username"}
                 placeholderTextColor={theme.card}
                 textAlign="center"
                 onChangeText={inputUsername}
@@ -211,7 +214,7 @@ function Login({theme}: LoginProps): JSX.Element {
                     backgroundColor: theme.darker,
                     color: theme.green
                 }}
-                placeholder = {"Password"}
+                placeholder = {lang ? "Passord" : "Password"}
                 placeholderTextColor={theme.card}
                 textAlign="center"
                 secureTextEntry={true}
@@ -225,7 +228,7 @@ function Login({theme}: LoginProps): JSX.Element {
                     color: theme.contrast, 
                     backgroundColor: theme.green
                 }}>
-                    LOGIN
+                    {lang ? "Logg inn" : "Login"}
                 </Text>
             </TouchableOpacity>
         </View>

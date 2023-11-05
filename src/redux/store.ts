@@ -6,7 +6,9 @@ import NameReducer from "./slices/name"
 import LoginReducer from "./slices/login"
 import ThemeReducer from "./slices/theme"
 import thunk from "redux-thunk"
-import LangReducer from ".//slices/lang"
+import LangReducer from "./slices/lang"
+import AdReducer from "./slices/ad"
+import CategoryReducer from "./slices/categories"
 
 // Combines all reducers
 const reducers = combineReducers({
@@ -14,14 +16,16 @@ const reducers = combineReducers({
     name: NameReducer,
     login: LoginReducer,
     lang: LangReducer,
-    theme: ThemeReducer
+    theme: ThemeReducer,
+    ad: AdReducer,
+    category: CategoryReducer
 })
 
 // Declares key and storage to store the redux states in, and whitelists states
 const saveState = {
     key: "root",
     storage: AsyncStorage,
-    whitelist: ["animate", "name", "login", "theme", "lang"]
+    whitelist: ["animate", "name", "login", "theme", "lang", "search", "ad", "category"]
 }
 
 // Persistor to remember the state

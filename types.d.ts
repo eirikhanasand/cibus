@@ -13,6 +13,7 @@ type RootStackParamList = {
     PlayScreen: PlayScreenProps
     StatsScreen: any
     MenuScreen: any
+    AdScreen: any
 }
 
 // Props for the Welcome component
@@ -41,11 +42,43 @@ type ReduxState = {
     lang: {
         lang: boolean
     }
+    search: {
+        input: ""
+    }
+    ad: {
+        ad: Ad
+    }
+    category: {
+        category: Category
+    }
 }
 
-type PurchasedGames = {
-    lotto: number[] | null
-    pogchamp: number[] | null
-    megaluck: number[] | null
-    eveningspin: number[] | null
+type Bookmark = {
+    id: number
+}
+
+type Ad = {
+    id: number
+    title_no: string
+    title_en: string
+    price: number
+    location: string
+    seller: Seller
+    image: string
+}
+
+type Seller = {
+    id: number
+    name: string
+    phone: number
+}
+
+type Category = {
+    categories_no: SubCatArray[]
+    categories_en: SubCatArray[]
+}
+
+type SubCatArray = {
+    title: string
+    subcategories: string[]
 }

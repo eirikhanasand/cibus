@@ -2,11 +2,10 @@ import { SafeAreaView, useColorScheme, Text, ScrollView } from 'react-native'
 import { LandingStyles } from "@screens/landing/landingStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
 import Relevant from '@components/landing/relevant'
-import { Section } from '@components/shared/default/defaultComponents'
 import Welcome from '@components/landing/welcome'
-import LightTheme from '@themes/lightTheme.json'
-import DarkTheme from '@themes/darkTheme.json'
-import Games from '@components/landing/games'
+import LightTheme from '@themes/lightTheme'
+import DarkTheme from '@themes/darkTheme'
+import Ads from '@components/landing/ads'
 import { LandingScreenProps } from '@interfaces'
 
 export default function LandingScreen({ navigation }: LandingScreenProps): JSX.Element {
@@ -22,7 +21,7 @@ export default function LandingScreen({ navigation }: LandingScreenProps): JSX.E
             <CustomStatusBar />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Welcome />
-                <Games navigation={navigation} />
+                <Ads navigation={navigation} />
                 <Relevant navigation={navigation} />
             </ScrollView>
         </SafeAreaView>

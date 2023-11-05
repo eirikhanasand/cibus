@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 
-const GameStyles = StyleSheet.create({
+const AdStyles = StyleSheet.create({
     // View containg two buttons
     viewTwo: {
         flexDirection: "row",
@@ -48,4 +48,4 @@ const GameStyles = StyleSheet.create({
     }
 })
 
-export default GameStyles
+export default AdStyles

@@ -1,10 +1,10 @@
 import { SafeAreaView, useColorScheme, ScrollView } from 'react-native'
-import { PlayStyles } from "@screens/play/playStyles"
+import { PlayStyles } from "@screens/categories/playStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
-import LightTheme from '@themes/lightTheme.json'
-import DarkTheme from '@themes/darkTheme.json'
+import LightTheme from '@themes/lightTheme'
+import DarkTheme from '@themes/darkTheme'
 import { PlayScreenProps } from "@interfaces"
-import Play from '@components/play/play'
+import Play from '@components/categories/categories'
 import { useRef } from 'react'
 
 export default function PlayScreen({ route, navigation }: PlayScreenProps): JSX.Element {
@@ -15,7 +15,7 @@ export default function PlayScreen({ route, navigation }: PlayScreenProps): JSX.
 
     // Scrolls to the location of the category (1200 is the bottom)
     switch (category) {
-        case "ALL GAMES":
+        case "All clothes":
         case "LOTTERY":         scrollToPosition(0);    break;
         case "SPORT":           scrollToPosition(270);  break;
         case "CELEBRITIES":     scrollToPosition(610);  break;
@@ -40,7 +40,7 @@ export default function PlayScreen({ route, navigation }: PlayScreenProps): JSX.
                 showsVerticalScrollIndicator={false} 
                 ref={scrollViewRef}
             >
-                <Play navigation={navigation} category={category} />
+                {/* <Play category={category} /> */}
             </ScrollView>
         </SafeAreaView>
     )

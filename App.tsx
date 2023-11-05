@@ -4,7 +4,7 @@ import { PersistGate } from "redux-persist/integration/react"
 import { persistStore } from "redux-persist"
 import { AppRegistry } from "react-native"
 import { Provider } from "react-redux"
-import Store from "./src/redux/store"
+import Store from "@redux/store"
 import React from "react"
 
 let persistor = persistStore(Store)

@@ -1,11 +1,12 @@
 import { Image, Text, TouchableOpacity, View, useColorScheme } from "react-native"
 import HeaderStyles from "@nav/headerStyles"
-import LightTheme from '@themes/lightTheme.json'
-import DarkTheme from '@themes/darkTheme.json'
+import LightTheme from '@themes/lightTheme'
+import DarkTheme from '@themes/darkTheme'
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { setLang } from "@redux/slices/lang"
 import { setTheme } from "@redux/slices/theme"
+import Filter from "@components/shared/filter/filter"
 
 type IconValue = "globe" | "theme"
 
@@ -59,9 +60,7 @@ export default function Header(): JSX.Element {
                 {isNested() && <GobackView />}
                 {!name.length || !login
                     ? <>
-                        <Text style={{ ...HeaderStyles.logo, color: theme.contrast }}>
-                            Cibus
-                        </Text>
+                        <Filter />
                         <HeaderIcons />
                     </>
                     : <>
@@ -103,6 +102,7 @@ function HeaderIcon({type}: {type: IconValue}) {
     const sun = require("@assets/sun.png")
     const moon = require("@assets/moon.png")
     const isDark = useColorScheme() === 'dark'
+    const theme = isDark ? DarkTheme : LightTheme
     const langIcon = isDark ? globeLight : globe
     const themeIcon = isDark ? sun : moon
     const icon = type === "globe" ? langIcon : themeIcon
@@ -113,9 +113,9 @@ function HeaderIcon({type}: {type: IconValue}) {
 
     return (
         <TouchableOpacity onPress={handlePress}>
-            <View>
+            <View style={{flexDirection: "row"}}>
                 <Image style={HeaderStyles.menu} source={icon} />
-                {type === "globe" && <Text>{lang ? "en" : "no"}</Text>}
+                {type === "globe" && <Text style={{color: theme.contrast, fontSize: 20, left: -20, top: 4}}>{lang ? "en" : "no"}</Text>}
             </View>
         </TouchableOpacity>
     )

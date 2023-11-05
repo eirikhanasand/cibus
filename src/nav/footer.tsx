@@ -2,8 +2,8 @@ import { FooterProps } from '@interfaces'
 import { RouteProp } from '@react-navigation/native'
 import { View, Image, TouchableOpacity, useColorScheme } from 'react-native'
 import FooterStyles from '@nav/footerStyles'
-import LightTheme from '@themes/lightTheme.json'
-import DarkTheme from '@themes/darkTheme.json'
+import LightTheme from '@themes/lightTheme'
+import DarkTheme from '@themes/darkTheme'
 
 export default function Footer({ state, descriptors, navigation }: FooterProps): 
 JSX.Element {

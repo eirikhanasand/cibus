@@ -35,3 +35,7 @@ export interface LandingScreenProps extends FooterProps {
 export interface PlayScreenProps extends FooterProps {
     route: RouteProp<RootStackParamList, 'PlayScreen'>
 }
+
+export interface AdScreenProps extends FooterProps {
+    route: RouteProp<RootStackParamList, 'AdScreen'>
+}
