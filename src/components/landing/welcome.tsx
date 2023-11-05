@@ -1,7 +1,7 @@
 import { Text, TextInput, TouchableOpacity, View, useColorScheme } from "react-native"
 import WelcomeStyles from "./welcomeStyles"
-import LightTheme from '@themes/lightTheme'
-import DarkTheme from '@themes/darkTheme'
+import LightTheme from '@themes/light'
+import DarkTheme from '@themes/dark'
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setDisplayLogin, setLogin } from "@redux/slices/login"

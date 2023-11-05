@@ -1,8 +1,8 @@
 import { StatusBar, Text, useColorScheme, View } from 'react-native'
 import DefaultStyles from '@components/shared/default/defaultComponentStyles'
-import LightTheme from '@themes/lightTheme'
+import LightTheme from '@themes/light'
 import type { PropsWithChildren } from 'react'
-import DarkTheme from '@themes/darkTheme'
+import DarkTheme from '@themes/dark'
 import React from 'react'
 
 type SectionProps = PropsWithChildren<{

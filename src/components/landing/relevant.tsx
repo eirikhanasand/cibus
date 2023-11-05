@@ -1,7 +1,7 @@
 import { Image, ScrollView, Text, TouchableOpacity, View, useColorScheme } from "react-native"
 import RelevantStyles from "@components/landing/relevantStyles"
-import LightTheme from '@themes/lightTheme'
-import DarkTheme from '@themes/darkTheme'
+import LightTheme from '@themes/light'
+import DarkTheme from '@themes/dark'
 import { ScreenProps } from "@interfaces"
 import { useSelector } from "react-redux"
 

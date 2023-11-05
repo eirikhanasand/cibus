@@ -39,6 +39,10 @@ type ReduxState = {
         login: boolean
         displayLogin: boolean
     }
+    theme: {
+        value: boolean,
+        theme: Theme
+    }
     lang: {
         lang: boolean
     }
@@ -81,4 +85,12 @@ type Category = {
 type SubCatArray = {
     title: string
     subcategories: string[]
+}
+
+type Theme = {
+    content: string
+    card: string
+    darker: string
+    contrast: string
+    green: string
 }

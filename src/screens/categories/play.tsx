@@ -1,8 +1,8 @@
 import { SafeAreaView, useColorScheme, ScrollView } from 'react-native'
 import { PlayStyles } from "@screens/categories/playStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
-import LightTheme from '@themes/lightTheme'
-import DarkTheme from '@themes/darkTheme'
+import LightTheme from '@themes/light'
+import DarkTheme from '@themes/dark'
 import { PlayScreenProps } from "@interfaces"
 import Play from '@components/categories/categories'
 import { useRef } from 'react'

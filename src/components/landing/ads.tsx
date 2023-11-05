@@ -1,8 +1,8 @@
 import AdStyles from "@components/landing/adStyles"
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native"
 import { Card } from "@components/shared/default/defaultComponents"
-import LightTheme from '@themes/lightTheme'
-import DarkTheme from '@themes/darkTheme'
+import LightTheme from '@themes/light'
+import DarkTheme from '@themes/dark'
 import { Navigation, ScreenProps } from "@interfaces"
 import { useDispatch, useSelector } from "react-redux"
 import { setAnimate } from "@redux/slices/animate"

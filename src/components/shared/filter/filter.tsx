@@ -3,8 +3,8 @@ import filterStyles from "./filterStyles"
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "@redux/slices/search";
-import DarkTheme from "@themes/darkTheme"
-import LightTheme from "@themes/lightTheme"
+import DarkTheme from "@themes/dark"
+import LightTheme from "@themes/light"
 
 export default function Filter() {
     const textInputRef = useRef<TextInput | null>(null)

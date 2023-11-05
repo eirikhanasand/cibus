@@ -1,8 +1,8 @@
 import CategoryStyles from "@components/categories/categoryStyles"
 import { Text, TouchableOpacity, View, useColorScheme } from "react-native"
 import { Card } from "@components/shared/default/defaultComponents"
-import LightTheme from '@themes/lightTheme'
-import DarkTheme from '@themes/darkTheme'
+import LightTheme from '@themes/light'
+import DarkTheme from '@themes/dark'
 import { Navigation } from "@interfaces"
 import React, { useEffect, useState } from "react"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"

@@ -1,7 +1,7 @@
 import { Image, Text, TouchableOpacity, View, useColorScheme } from "react-native"
 import HeaderStyles from "@nav/headerStyles"
-import LightTheme from '@themes/lightTheme'
-import DarkTheme from '@themes/darkTheme'
+import LightTheme from '@themes/light'
+import DarkTheme from '@themes/dark'
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { useDispatch, useSelector } from "react-redux"
 import { setLang } from "@redux/slices/lang"

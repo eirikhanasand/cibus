@@ -1,8 +1,8 @@
 import { SafeAreaView, useColorScheme, ScrollView } from 'react-native'
 import { StatsStyles } from "@screens/stats/statsStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
-import LightTheme from '@themes/lightTheme'
-import DarkTheme from '@themes/darkTheme'
+import LightTheme from '@themes/light'
+import DarkTheme from '@themes/dark'
 import { ScreenProps } from "@interfaces"
 import Header from '@nav/header'
 import Footer from '@nav/footer'

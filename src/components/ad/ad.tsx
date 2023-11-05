@@ -1,8 +1,8 @@
-import DarkTheme from "@themes/darkTheme"
-import lightTheme from "@themes/lightTheme"
+import DarkTheme from "@themes/dark"
+import lightTheme from "@themes/light"
 import { Text, View, useColorScheme } from "react-native"
 import { useSelector } from "react-redux"
-import AdStyles from "./ad"
+import AdStyles from "./adStyles"
 
 type RowProps = {
     left: string
@@ -32,9 +32,11 @@ export default function Ad() {
 
     return (
         <View style={{top: 50}}>
-            <Text style={{color: theme.contrast, marginLeft: 10, marginTop: 10, fontSize: 20}}>{ad.title}</Text>
-            <Text style={{color: theme.contrast}}>{lang ? "Pris" : "Sted"}: {ad.price}</Text>
-            <Text style={{color: theme.contrast}}>{lang ? "Sted" : "Location"}: {ad.location}</Text>
+            <View style={{backgroundColor: theme.darker, margin: 10, padding: 10, borderRadius: 10}}>
+                <Text style={{color: theme.contrast, fontSize: 24, fontWeight: "600"}}>{ad.title}</Text>
+                <Row left={lang ? "Pris" : "Price"} right={`${ad.price}`} />
+                <Row left={lang ? "Sted" : "Location"} right={`${ad.location}`} />
+            </View>
             <Contact />
         </View>
     )
@@ -62,7 +64,8 @@ function Contact() {
     }
 
     return (
-        <View style={{backgroundColor: theme.darker, margin: 10, padding: 10, borderRadius: 10}}>
+        <View style={{backgroundColor: theme.darker, margin: 10, marginTop: 0, padding: 10, borderRadius: 10}}>
+            <Text style={{color: 'white', fontSize: 20, marginBottom: 10}}>{lang ? "Selger" : "Seller"}:</Text>
             <Row left="ID" right={`${ad.seller.id}`} />
             <Row left={lang ? "Navn" : "Name"} right={`${ad.seller.name}`} />
             <Row left={lang ? "Tlf" : "Phon"} right={`${ad.seller.phone}`} />
@@ -75,7 +78,7 @@ function Row({left, right}: RowProps) {
     const theme = isDark ? DarkTheme : lightTheme
 
     return (
-        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+        <View style={AdStyles.rowView}>
             <Text style={{...AdStyles.sellerText, color: theme.contrast}}>{left}:</Text>
             <Text style={{...AdStyles.sellerText, color: theme.contrast}}>{right}</Text>
         </View>
