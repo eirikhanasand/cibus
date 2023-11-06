@@ -7,18 +7,17 @@ const RelevantStyles = StyleSheet.create({
         height: "100%",
         borderRadius: 15,
         overflow: "hidden",
-        left: 10,
     },
     // Relevant title
     title: {
         fontSize: 24,
         fontWeight: '700',
         marginBottom: 8,
-        left: 10
     },
     // View containing images inside of relevant
     content: {
-        margin: 15,
+        top: 40,
+        margin: 10,
         paddingBottom: 45,
         marginTop: 4
     },
@@ -51,7 +50,6 @@ const RelevantStyles = StyleSheet.create({
         zIndex: 1,
         borderRadius: 15,
         overflow: "hidden",
-        left: 10,
     },
 })
 
