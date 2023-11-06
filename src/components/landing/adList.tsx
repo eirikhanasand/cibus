@@ -14,6 +14,7 @@ export default function AdList() {
     const clicked_en = clickedCategories.categories_en.map((category) =>  category.title)
     const categoryFiltered = ads.filter((ad) => clicked_no.includes(ad.category_no) || clicked_en.includes(ad.category_en))
     const cats = categoryFiltered.length ? categoryFiltered : ads
+
     return (
         <View style={{top: 60}}>
             {filter && <CategoryFilter />}

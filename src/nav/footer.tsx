@@ -2,11 +2,14 @@ import { FooterProps } from '@interfaces'
 import { RouteProp } from '@react-navigation/native'
 import { View, Image, TouchableOpacity } from 'react-native'
 import FooterStyles from '@nav/footerStyles'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setSearchHighlighted } from '@redux/slices/search'
 
 export default function Footer({ state, descriptors, navigation }: FooterProps): 
 JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const dispatch = useDispatch()
+
     return (
         <View style={{...FooterStyles.content, backgroundColor: theme.darker}}>
             {state.routes.map((route: RouteProp<RootStackParamList, any>, 
@@ -25,9 +28,8 @@ JSX.Element {
                         canPreventDefault: true,
                     })
 
+                    dispatch(setSearchHighlighted(false))
                     if (!isFocused && !event.defaultPrevented) {
-                        // The `merge: true` option makes sure that the
-                        // params inside the tab screen are preserved
                         navigation.navigate(route.name, {merge: true})
                     }
                 }

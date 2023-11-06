@@ -7,3 +7,5 @@ export const LandingStyles = StyleSheet.create({
         justifyContent: "center"
     },
 })
+
+export default LandingStyles

@@ -13,7 +13,11 @@ export default function Filter() {
 
     if (textInputRef.current && !highlighted) {
         textInputRef.current.blur()
-      }
+    }
+
+    function handleFocus() {
+        dispatch(setSearchHighlighted(true))
+    }
 
     return (
         <TextInput
@@ -25,7 +29,7 @@ export default function Filter() {
             textAlign="left"
             onChangeText={(val) => dispatch(setSearch(val))}
             selectionColor='#fd8738'
-            onFocus={() => dispatch(setSearchHighlighted(true))}
+            onFocus={handleFocus}
             onEndEditing={() => !filter && dispatch(setSearchHighlighted(false))}
         />
     )
