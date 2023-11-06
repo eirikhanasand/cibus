@@ -9,11 +9,16 @@ import { useDispatch, useSelector } from "react-redux";
 export default function AdList() {
     const { ads } = useSelector((state: ReduxState) => state.ad)
     const { filter, input } = useSelector((state: ReduxState) => state.search)
+    const { clickedCategories } = useSelector((state: ReduxState) => state.category)
+    const clicked_no = clickedCategories.categories_no.map((category) =>  category.title)
+    const clicked_en = clickedCategories.categories_en.map((category) =>  category.title)
+    const categoryFiltered = ads.filter((ad) => clicked_no.includes(ad.category_no) || clicked_en.includes(ad.category_en))
+    const cats = categoryFiltered.length ? categoryFiltered : ads
 
     return (
         <View style={{top: 60}}>
             {filter && <CategoryFilter />}
-            {ads.filter((ad) => ad.title_no.includes(input) || ad.title_en.includes(input)).map((ad) => <Ad key={ad.id} ad={ad}/>)}
+            {cats.filter((ad) => ad.title_no.includes(input) || ad.title_en.includes(input)).map((ad) => <Ad key={ad.id} ad={ad}/>)}
         </View>
     )
 }

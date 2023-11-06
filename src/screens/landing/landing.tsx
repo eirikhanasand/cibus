@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, View } from 'react-native'
+import { SafeAreaView, ScrollView } from 'react-native'
 import { LandingStyles } from "@screens/landing/landingStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
 import Relevant from '@components/landing/relevant'
