@@ -11,7 +11,6 @@ import fetchAds from '@utils/fetchAds'
 import { setAds } from '@redux/slices/ad'
 import { setCategories } from '@redux/slices/categories'
 import fetchCategories from '@utils/fetchCategories'
-import CategoryFilter from '@components/shared/filter/categoryFilter'
 
 export default function LandingScreen(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)

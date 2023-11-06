@@ -8,7 +8,8 @@ type BookmarkIconProps = {
 
 export default function BookmarkIcon({id}: BookmarkIconProps) {
     const { bookmarks } = useSelector((state: ReduxState) => state.bookmarks)
-    const unchecked = require('@assets/bookmark.png')
+    const { value } = useSelector((state: ReduxState) => state.theme)
+    const unchecked = value ? require('@assets/bookmark.png') : require('@assets/bookmark-black.png')
     const checked = require('@assets/bookmark-yellow.png')
     const highlighted = bookmarks.includes(id)
     const bookmark = highlighted ? checked : unchecked

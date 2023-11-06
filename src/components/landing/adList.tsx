@@ -8,12 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function AdList() {
     const { ads } = useSelector((state: ReduxState) => state.ad)
-    const { filter } = useSelector((state: ReduxState) => state.search)
+    const { filter, input } = useSelector((state: ReduxState) => state.search)
 
     return (
         <View style={{top: 60}}>
             {filter && <CategoryFilter />}
-            {ads.map((ad) => <Ad key={ad.id} ad={ad}/>)}
+            {ads.filter((ad) => ad.title_no.includes(input) || ad.title_en.includes(input)).map((ad) => <Ad key={ad.id} ad={ad}/>)}
         </View>
     )
 }
@@ -22,6 +22,7 @@ function Ad({ad}: {ad: Ad}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const navigation: Navigation = useNavigation()
+    const price = ad.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
     const dispatch = useDispatch()
 
     function handlePress() {
@@ -36,7 +37,7 @@ function Ad({ad}: {ad: Ad}) {
                     <Image style={{height: 50, width: 100}} source={{uri: ad.images[0]}} />
                     <View style={{left: 10}}>
                         <Text style={{color: theme.contrast, fontSize: 22}}>{lang ? ad.title_no: ad.title_en}</Text>
-                        <Text style={{color: theme.contrast, fontSize: 15, top: 5}}>{ad.price} kr</Text>
+                        <Text style={{color: theme.contrast, fontSize: 15, top: 5}}>{price} kr</Text>
                     </View>
                 </View>
                 <BookmarkIcon id={ad.id} />
