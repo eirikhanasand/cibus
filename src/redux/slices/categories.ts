@@ -5,7 +5,14 @@ export const CategorySlice = createSlice({
     name: "category",
     initialState: {
         // Category object
-        category: {} as Category
+        category: {
+            categories_no: [],
+            categories_en: []
+        } as Category,
+        clickedCategories: {
+            categories_no: [],
+            categories_en: []
+        } as Category
     },
     // Declares reducers
     reducers: {
@@ -13,11 +20,14 @@ export const CategorySlice = createSlice({
         setCategories(state, action) {
             state.category = action.payload
         },
+        setClickedCategories(state, action) {
+            state.clickedCategories = action.payload
+        },
     }
 })
 
 // Exports the change function
-export const { setCategories } = CategorySlice.actions
+export const { setCategories, setClickedCategories } = CategorySlice.actions
 
 // Exports the lang slice
 export default CategorySlice.reducer

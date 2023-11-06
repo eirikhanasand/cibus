@@ -1,16 +1,24 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
-import BookmarkStyles from "./bookmarkStyles";
-import { useDispatch, useSelector } from "react-redux";
-import BookmarkIcon from "./bookmarkIcon";
-import { useNavigation } from "@react-navigation/native";
+import BookmarkIcon from "@components/bookmarks/bookmarkIcon";
+import CategoryFilter from "@components/shared/filter/categoryFilter";
 import { Navigation } from "@interfaces";
+import { useNavigation } from "@react-navigation/native";
 import { setAd } from "@redux/slices/ad";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
-type BookmarkProps = {
-    ad: Ad
+export default function AdList() {
+    const { ads } = useSelector((state: ReduxState) => state.ad)
+    const { filter } = useSelector((state: ReduxState) => state.search)
+
+    return (
+        <View style={{top: 60}}>
+            {filter && <CategoryFilter />}
+            {ads.map((ad) => <Ad key={ad.id} ad={ad}/>)}
+        </View>
+    )
 }
 
-export default function Bookmark({ad}: BookmarkProps) {
+function Ad({ad}: {ad: Ad}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const navigation: Navigation = useNavigation()

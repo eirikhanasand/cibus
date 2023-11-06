@@ -47,7 +47,9 @@ type ReduxState = {
         lang: boolean
     }
     search: {
-        input: ""
+        input: string
+        highlighted: boolean
+        filter: boolean
     }
     ad: {
         ad: Ad
@@ -55,6 +57,7 @@ type ReduxState = {
     }
     category: {
         category: Category
+        clickedCategories: Category
     }
     bookmarks: {
         bookmarks: number[]

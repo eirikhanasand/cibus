@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { setLang } from "@redux/slices/lang"
 import { setTheme } from "@redux/slices/theme"
 import Filter from "@components/shared/filter/filter"
+import CategoryFilter from "@components/shared/filter/categoryFilter"
+import { setCategories } from "@redux/slices/categories"
+import { setFilter } from "@redux/slices/search"
 
-type IconValue = "globe" | "theme"
+type IconValue = "globe" | "theme" | "filter"
 
 export default function Header(): JSX.Element {
     const { name } = useSelector((state: ReduxState) => state.name)
@@ -79,10 +82,15 @@ export default function Header(): JSX.Element {
  * Renders all icons of the header
  */
 function HeaderIcons() {
+    const { highlighted } = useSelector((state: ReduxState) => state.search)
+
     return (
         <View style={HeaderStyles.headerRow}>
-            <HeaderIcon type="theme" />
-            <HeaderIcon type="globe" />
+            {!highlighted && <>
+                <HeaderIcon type="theme" />
+                <HeaderIcon type="globe" />
+            </>}
+            {highlighted && <HeaderIcon type="filter" />}
         </View>
     )
 }
@@ -93,6 +101,7 @@ function HeaderIcons() {
  */
 function HeaderIcon({type}: {type: IconValue}) {
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { filter } = useSelector((state: ReduxState) => state.search)
     const { theme, value } = useSelector((state: ReduxState) => state.theme)
     const dispatch = useDispatch()
     const globe = require("@assets/globe.png")
@@ -101,10 +110,11 @@ function HeaderIcon({type}: {type: IconValue}) {
     const moon = require("@assets/moon.png")
     const langIcon = value ? globeLight : globe
     const themeIcon = value ? sun : moon
-    const icon = type === "globe" ? langIcon : themeIcon
+    const filterIcon = filter ? require("@assets/filter-green.png") : require("@assets/filter.png")
+    const icon = type === "globe" ? langIcon : type === "theme" ? themeIcon : filterIcon
 
     function handlePress() {
-        type === "globe" ? dispatch(setLang()) : dispatch(setTheme())
+        type === "globe" ? dispatch(setLang()) : type === "theme" ? dispatch(setTheme()) : dispatch(setFilter())
     }
 
     return (

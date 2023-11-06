@@ -1,13 +1,43 @@
-import { SafeAreaView, ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView, View } from 'react-native'
 import { LandingStyles } from "@screens/landing/landingStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
 import Relevant from '@components/landing/relevant'
 import Welcome from '@components/landing/welcome'
 import Ads from '@components/landing/ads'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import AdList from '@components/landing/adList'
+import { useEffect } from 'react'
+import fetchAds from '@utils/fetchAds'
+import { setAds } from '@redux/slices/ad'
+import { setCategories } from '@redux/slices/categories'
+import fetchCategories from '@utils/fetchCategories'
+import CategoryFilter from '@components/shared/filter/categoryFilter'
 
 export default function LandingScreen(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { highlighted } = useSelector((state: ReduxState) => state.search)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        async function getAds() {
+            const ads = await fetchAds()
+
+            if (ads) {
+                dispatch(setAds(ads))
+            }
+        }
+
+        async function getCategories() {
+            const categories = await fetchCategories()
+
+            if (categories) {
+                dispatch(setCategories(categories))
+            }
+        }
+        
+        getAds()
+        getCategories()
+    }, [])
 
     return (
         <SafeAreaView style={{
@@ -16,9 +46,13 @@ export default function LandingScreen(): JSX.Element {
             }}>
             <CustomStatusBar />
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Welcome />
-                <Ads />
-                <Relevant />
+                {!highlighted &&
+                <>
+                    <Welcome />
+                    <Ads />
+                    <Relevant />
+                </>}
+                {highlighted && <AdList />}
             </ScrollView>
         </SafeAreaView>
     )

@@ -15,7 +15,7 @@ export default function BookmarkScreen() {
 
     return (
         <View style={{backgroundColor: theme.content, flex: 1, paddingTop: 100, padding: 10}}>
-            {items.map((bookmark) => <Bookmark ad={bookmark} />)}
+            {items.map((bookmark) => <Bookmark key={bookmark.id} ad={bookmark} />)}
         </View>
     )
 }

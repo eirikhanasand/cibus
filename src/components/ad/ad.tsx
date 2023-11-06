@@ -31,7 +31,7 @@ export default function Ad() {
                     showsHorizontalScrollIndicator={false}
                     style={{marginBottom: 10}}
                 >
-                    {ad.images.map((image) => <Image 
+                    {/* {ad.images.map((image) => <Image 
                         key={image}
                         source={{uri: image}} 
                         style={{
@@ -42,7 +42,7 @@ export default function Ad() {
                             overflow: "hidden",
                             borderRadius: 15
                         }} 
-                    />)}
+                    />)} */}
                 </ScrollView>
                 <Text style={{color: theme.contrast, fontSize: 24, fontWeight: "600"}}>{title}</Text>
                 <Row left={lang ? "Pris" : "Price"} right={`${ad.price}`} />
