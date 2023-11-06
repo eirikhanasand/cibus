@@ -1,33 +1,67 @@
 import { StyleSheet } from "react-native"
 
 const CartStyles = StyleSheet.create({
-    // Content of the cart view
-    content: {
-        // Added margin bottom as content was hidden below the bottom menu
-        marginBottom: 95
+    cartView: {
+        top: 50
     },
-    // View containg two buttons
-    viewTwo: {
+    confirmationText: {
+        fontSize: 24, 
+        fontWeight: "600", 
+        left: 10, 
+        top: 4
+    },
+    innerCartView: {
+        margin: 10, 
+        borderRadius: 10, 
+        padding: 10
+    },
+    cartHeaderView: {
+        flexDirection: "row", 
+        justifyContent: "space-between"
+    },
+    cartHeaderText: {
+        fontSize: 18, 
+        fontWeight: "600"
+    },
+    cartHeaderInnerView: {
+        flexDirection: "row", 
+        justifyContent: "space-between", 
+        width: "61%"
+    },
+    innerTextOne: {
+        fontSize: 18, 
+        fontWeight: "600", 
+        textAlign: "right",
+         width: "50%"
+    },
+    innerTextTwo: {
+        fontSize: 18, 
+        fontWeight: "600", 
+        left: -20
+    },
+    footer: {
+        flexDirection: "row", 
+        justifyContent: "space-between"
+    },
+    total: {
+        fontSize: 18, 
+        fontWeight: "600"
+    },
+    footerRight: {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 6,
+        width: "61%"
     },
-    // Text for two buttons section
-    textTwo: {
-        height: 60,
-        fontSize: 20,
-        borderRadius: 10,
-        textAlign: "center",
-        lineHeight: 60,
-        overflow: "hidden",
-        fontWeight: "600",
+    footerAmount: {
+        fontSize: 18, 
+        textAlign: "right", 
+        width: "36%"
     },
-    // TouchableOpacity for two buttons section
-    touchableTwo: {
-        borderRadius: 10,
-        width: "49%",
-    },
+    itemRight: {
+        flexDirection: "row", 
+        justifyContent: "space-between", 
+        width: "48%"
+    }
 })
 
 export default CartStyles

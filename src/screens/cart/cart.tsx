@@ -5,9 +5,11 @@ import { useSelector } from 'react-redux'
 import Cart from '@components/cart/cart'
 import Similar from '@components/cart/similar'
 import Options from '@components/cart/options'
+import AdList from '@components/landing/adList'
 
 export default function CartScreen(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
+    const { highlighted } = useSelector((state: ReduxState) => state.search)
 
     return (
         <SafeAreaView style={{
@@ -16,9 +18,12 @@ export default function CartScreen(): JSX.Element {
             }}>
             <CustomStatusBar />
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Cart />
-                <Similar screen='cart' />
-                <Options />
+                {!highlighted && <>
+                    <Cart />
+                    <Similar screen='cart' />
+                    <Options />
+                </>}
+                {highlighted && <AdList />}
             </ScrollView>
         </SafeAreaView>
     )

@@ -1,6 +1,7 @@
 import getTotal from "@utils/getCart";
 import { Text, View } from "react-native";
 import { useSelector } from "react-redux";
+import CartStyles from "./cartStyles";
 
 type CartItemProps = {
     item: Ad
@@ -16,9 +17,11 @@ export default function Cart() {
     if (!cart.length) return <View style={{marginTop: 10}} />
 
     return (
-        <View style={{top: 50}}>
-            <Text style={{fontSize: 24, fontWeight: "600", left: 10, top: 4, color: theme.contrast}}>{lang ? "I handlevognen" : "In cart"}</Text>
-            <View style={{backgroundColor: theme.card, margin: 10, borderRadius: 10, padding: 10}}>
+        <View style={CartStyles.cartView}>
+            <Text style={{...CartStyles.confirmationText, color: theme.contrast}}>
+                {lang ? "I handlevognen" : "In cart"}
+                </Text>
+            <View style={{...CartStyles.innerCartView, backgroundColor: theme.card}}>
                 <CartHeader />
                 {cartItems.map((item) => <CartItem key={item.id} item={item} />)}
                 <CartFooter />
@@ -32,11 +35,17 @@ function CartHeader() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-            <Text style={{fontSize: 18, fontWeight: "600", color: theme.contrast}}>{lang ? "Gjenstand" : "Item"}</Text>
-            <View style={{flexDirection: "row", justifyContent: "space-between", width: "61%"}}>
-                <Text style={{fontSize: 18, fontWeight: "600", textAlign: "right", width: "50%", color: theme.contrast}}>{lang ? "Antall" : "Amount"}</Text>
-                <Text style={{fontSize: 18, fontWeight: "600", left: -20, color: theme.contrast}}>{lang ? "Pris" : "Price"}</Text>
+        <View style={CartStyles.cartHeaderView}>
+            <Text style={{...CartStyles.cartHeaderText, color: theme.contrast}}>
+                {lang ? "Gjenstand" : "Item"}
+            </Text>
+            <View style={CartStyles.cartHeaderInnerView}>
+                <Text style={{...CartStyles.innerTextOne, color: theme.contrast}}>
+                    {lang ? "Antall" : "Amount"}
+                </Text>
+                <Text style={{...CartStyles.innerTextTwo, color: theme.contrast}}>
+                    {lang ? "Pris" : "Price"}
+                </Text>
             </View>
         </View>
     )
@@ -50,11 +59,15 @@ function CartFooter() {
     const total = getTotal(cart, ads).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
 
     return (
-        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-            <Text style={{fontSize: 18, fontWeight: "600", color: theme.contrast}}>{lang ? "Totalt" : "Total"}</Text>
-            <View style={{flexDirection: "row", justifyContent: "space-between", width: "61%"}}>
+        <View style={CartStyles.footer}>
+            <Text style={{...CartStyles.total, color: theme.contrast}}>
+                {lang ? "Totalt" : "Total"}
+            </Text>
+            <View style={CartStyles.footerRight}>
                 <Text />
-                <Text style={{fontSize: 18, color: theme.contrast}}>{total} kr</Text>
+                <Text style={{fontSize: 18, color: theme.contrast}}>
+                    {total} kr
+                </Text>
             </View>
         </View>
     )
@@ -69,10 +82,10 @@ function CartItem({item}: CartItemProps) {
     }
 
     return (
-        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+        <View style={CartStyles.footer}>
             <Text style={{fontSize: 18, color: theme.contrast}}>{ad.title}</Text>
-            <View style={{flexDirection: "row", justifyContent: "space-between", width: "48%"}}>
-                <Text style={{fontSize: 18, textAlign: "right", width: "36%", color: theme.contrast}}>1</Text>
+            <View style={CartStyles.itemRight}>
+                <Text style={{...CartStyles.footerAmount, color: theme.contrast}}>1</Text>
                 <Text style={{fontSize: 18, color: theme.contrast}}>{ad.price} kr</Text>
             </View>
         </View>

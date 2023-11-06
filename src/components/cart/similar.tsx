@@ -27,12 +27,15 @@ export default function Similar({screen}: SimilarProps): JSX.Element {
     const itemsInCart = ads.filter((ad) => cart.includes(ad.id))
     let similar = getSimilar(itemsInCart, lang)
     const doubleCarousel = screen !== 'ad'
+    const top = screen === 'cart' ? cart.length ? 50 : 25 : 0
     const similarTwo = [...similar]
     const similarThree = [...similar]
 
     let i = 0
     while (similar.length < 5 && i < ads.length) {
-        if (!itemsInCart.some((item) => item.id === ads[i].id) && !similar.some((item) => item.id === ads[i].id) && ads[i].id !== ad.id) {
+        if (!itemsInCart.some((item) => item.id === ads[i].id) 
+            && !similar.some((item) => item.id === ads[i].id) 
+            && ads[i].id !== ad.id) {
             similar.push(ads[i]);
             similarTwo.push(ads[i + 5])
             similarThree.push(ads[i + 10])
@@ -41,7 +44,7 @@ export default function Similar({screen}: SimilarProps): JSX.Element {
     }
 
     return (
-        <View style={{...SimilarStyles.content, top: screen === 'cart' ? 50 : 0, marginBottom: screen === 'ad' ? 60 : 20}}>
+        <View style={{...SimilarStyles.content, top, marginBottom: screen === 'ad' ? 60 : 20}}>
             <Text style={{...SimilarStyles.title, color: theme.contrast}}>
                 {lang ? "Anbefalt" : "Recommended"}
             </Text>
@@ -58,11 +61,7 @@ function ImageCarousel({similar, direct}: ImageCarouselProps) {
     const dispatch = useDispatch()
 
     function handlePress(ad: Ad) {
-        if (direct) {
-            dispatch(setCart([...cart, ad.id]))
-        } else {
-            dispatch(setAd(ad))
-        }
+        direct ? dispatch(setCart([...cart, ad.id])) : dispatch(setAd(ad))
     }
     
     return (

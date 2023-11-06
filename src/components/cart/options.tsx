@@ -18,7 +18,7 @@ export default function Options() {
     if (!cart.length) return <View />
 
     return (
-        <View style={{flexDirection: "row", justifyContent: "space-between", marginHorizontal: 10, marginTop: -10, marginBottom: 50 + cart.length}}>
+        <View style={{...OptionStyles.optionsView, marginBottom: 50 + cart.length}}>
             <Button text={lang ? "Nullstill" : "Reset"} type="reset" />
             <Button text={lang ? "Betal" : "Pay"} type="pay" />
         </View>
@@ -29,7 +29,6 @@ function Button({text, type}: ButtonProps) {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { bookmarks } = useSelector((state: ReduxState) => state.bookmarks)
     const { cart } = useSelector((state: ReduxState) => state.cart)
-    const navigation: Navigation = useNavigation()
     const dispatch = useDispatch()
     
     function handlePress() {

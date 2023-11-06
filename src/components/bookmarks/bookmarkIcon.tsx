@@ -1,6 +1,7 @@
 import { setBookmarks } from "@redux/slices/bookmarks";
 import { Image, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import BookmarkStyles from "./bookmarkStyles";
 
 type BookmarkIconProps = {
     id: number
@@ -24,12 +25,9 @@ export default function BookmarkIcon({id}: BookmarkIconProps) {
     }
 
     return (
-        <TouchableOpacity 
-            style={{height: 40, width: 40, position: "absolute", zIndex: 5, right: 0, top: 5}} 
-            onPress={handlePress}
-        >
+        <TouchableOpacity style={BookmarkStyles.touchable} onPress={handlePress}>
             <View>
-                <Image style={{height: 40, width: 40}} source={bookmark}/>
+                <Image style={BookmarkStyles.touchableImage} source={bookmark}/>
             </View>
         </TouchableOpacity>
     )

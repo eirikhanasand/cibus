@@ -2,8 +2,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import LandingScreen from '@screens/landing/landing'
 import CartScreen from '@screens/cart/cart'
 import { ImageProps } from "react-native"
-import MenuScreen from '@screens/menu/menu'
-import PlayScreen from '@screens/categories/play'
 import { TabOptions } from '@interfaces'
 import Footer from "@nav/footer"
 import { useState } from 'react'

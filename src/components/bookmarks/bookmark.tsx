@@ -23,12 +23,16 @@ export default function Bookmark({ad}: BookmarkProps) {
 
     return (
         <TouchableOpacity onPress={handlePress}>
-            <View style={{marginBottom: 10}}>
-                <View style={{flexDirection: "row"}}>
-                    <Image style={{height: 50, width: 100}} source={{uri: ad.images[0]}} />
+            <View style={BookmarkStyles.view}>
+                <View style={BookmarkStyles.innerView}>
+                    <Image style={BookmarkStyles.innerViewImage} source={{uri: ad.images[0]}} />
                     <View style={{left: 10}}>
-                        <Text style={{color: theme.contrast, fontSize: 22}}>{lang ? ad.title_no: ad.title_en}</Text>
-                        <Text style={{color: theme.contrast, fontSize: 15, top: 5}}>{ad.price} kr</Text>
+                        <Text style={{color: theme.contrast, fontSize: 22}}>
+                            {lang ? ad.title_no: ad.title_en}
+                        </Text>
+                        <Text style={{color: theme.contrast, fontSize: 15, top: 5}}>
+                            {ad.price} kr
+                        </Text>
                     </View>
                 </View>
                 <BookmarkIcon id={ad.id} />

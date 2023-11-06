@@ -11,6 +11,12 @@ const OptionStyles = StyleSheet.create({
     text: {
         fontSize: 25,
         fontWeight: "600"
+    },
+    optionsView: {
+        flexDirection: "row", 
+        justifyContent: "space-between", 
+        marginHorizontal: 10, 
+        marginTop: -10
     }
 })
 
