@@ -4,24 +4,34 @@ import { useDispatch, useSelector } from "react-redux"
 import getSimilar from "@utils/getSimilar"
 import { setCart } from "@redux/slices/cart"
 import BookmarkIcon from "@components/bookmarks/bookmarkIcon"
+import { setAd } from "@redux/slices/ad"
+
+type SimilarProps = {
+    screen: string
+}
+
+type ImageCarouselProps = {
+    similar: Ad[]
+    direct?: boolean
+}
 
 /**
  * JSX Element containing the sport images with text found on the landing screen.
  * @returns Relevant section
  */
-export default function Similar(): JSX.Element {
+export default function Similar({screen}: SimilarProps): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const { ads } = useSelector((state: ReduxState) => state.ad)
+    const { ad, ads } = useSelector((state: ReduxState) => state.ad)
     const { cart } = useSelector((state: ReduxState) => state.cart)
     const itemsInCart = ads.filter((ad) => cart.includes(ad.id))
-    const similar = getSimilar(itemsInCart, lang)
+    let similar = getSimilar(itemsInCart, lang)
     const similarTwo = [...similar]
     const similarThree = [...similar]
 
     let i = 0
     while (similar.length < 5 && i < ads.length) {
-        if (!itemsInCart.some((item) => item.id === ads[i].id) && !similar.some((item) => item.id === ads[i].id)) {
+        if (!itemsInCart.some((item) => item.id === ads[i].id) && !similar.some((item) => item.id === ads[i].id) && ads[i].id !== ad.id) {
             similar.push(ads[i]);
             similarTwo.push(ads[i + 5])
             similarThree.push(ads[i + 10])
@@ -30,24 +40,28 @@ export default function Similar(): JSX.Element {
     }
 
     return (
-        <View style={RelevantStyles.content}>
+        <View style={{...RelevantStyles.content, top: screen === 'ad' ? 0 : 50, marginBottom: screen === 'ad' ? 60 : 20}}>
             <Text style={{...RelevantStyles.title, color: theme.contrast}}>
                 {lang ? "Anbefalt" : "Recommended"}
             </Text>
-            <ImageCarousel similar={similar} />
-            {!cart.length && <ImageCarousel similar={similarTwo} />}
-            {!cart.length && <ImageCarousel similar={similarThree} />}
+            <ImageCarousel similar={similar} direct={screen === 'cart' && true} />
+            {!cart.length && screen === 'cart' && <ImageCarousel similar={similarTwo} direct={screen === 'cart' && true} />}
+            {!cart.length && screen === 'cart' && <ImageCarousel similar={similarThree} direct={screen === 'cart' && true} />}
         </View>
     )
 }
 
-function ImageCarousel({similar}: {similar: Ad[]}) {
+function ImageCarousel({similar, direct}: ImageCarouselProps) {
     const { cart } = useSelector((state: ReduxState) => state.cart)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const dispatch = useDispatch()
 
     function handlePress(ad: Ad) {
-        dispatch(setCart([...cart, ad.id]))
+        if (direct) {
+            dispatch(setCart([...cart, ad.id]))
+        } else {
+            dispatch(setAd(ad))
+        }
     }
     
     return (

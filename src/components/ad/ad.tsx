@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import AdStyles from "./adStyles"
 import BookmarkIcon from "@components/bookmarks/bookmarkIcon"
 import { setCart } from "@redux/slices/cart"
+import Similar from "@components/cart/similar"
 
 type RowProps = {
     left: string
@@ -49,6 +50,7 @@ export default function Ad() {
             </View>
             <Contact />
             <Action />
+            <Similar screen='ad' />
         </View>
     )
 }

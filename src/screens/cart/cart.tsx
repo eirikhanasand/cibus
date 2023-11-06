@@ -6,7 +6,7 @@ import Cart from '@components/cart/cart'
 import Similar from '@components/cart/similar'
 import Options from '@components/cart/options'
 
-export default function StatsScreen(): JSX.Element {
+export default function CartScreen(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
@@ -17,7 +17,7 @@ export default function StatsScreen(): JSX.Element {
             <CustomStatusBar />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Cart />
-                <Similar />
+                <Similar screen='cart' />
                 <Options />
             </ScrollView>
         </SafeAreaView>
