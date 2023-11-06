@@ -1,5 +1,5 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
-import RelevantStyles from "@components/landing/relevantStyles"
+import SimilarStyles from "./similarStyles"
 import { useDispatch, useSelector } from "react-redux"
 import getSimilar from "@utils/getSimilar"
 import { setCart } from "@redux/slices/cart"
@@ -26,6 +26,7 @@ export default function Similar({screen}: SimilarProps): JSX.Element {
     const { cart } = useSelector((state: ReduxState) => state.cart)
     const itemsInCart = ads.filter((ad) => cart.includes(ad.id))
     let similar = getSimilar(itemsInCart, lang)
+    const doubleCarousel = screen !== 'ad'
     const similarTwo = [...similar]
     const similarThree = [...similar]
 
@@ -40,12 +41,12 @@ export default function Similar({screen}: SimilarProps): JSX.Element {
     }
 
     return (
-        <View style={{...RelevantStyles.content, top: screen === 'ad' ? 0 : 50, marginBottom: screen === 'ad' ? 60 : 20}}>
-            <Text style={{...RelevantStyles.title, color: theme.contrast}}>
+        <View style={{...SimilarStyles.content, top: screen === 'cart' ? 50 : 0, marginBottom: screen === 'ad' ? 60 : 20}}>
+            <Text style={{...SimilarStyles.title, color: theme.contrast}}>
                 {lang ? "Anbefalt" : "Recommended"}
             </Text>
             <ImageCarousel similar={similar} direct={screen === 'cart' && true} />
-            {!cart.length && screen === 'cart' && <ImageCarousel similar={similarTwo} direct={screen === 'cart' && true} />}
+            {!cart.length && doubleCarousel && <ImageCarousel similar={similarTwo} direct={screen === 'cart' && true} />}
             {!cart.length && screen === 'cart' && <ImageCarousel similar={similarThree} direct={screen === 'cart' && true} />}
         </View>
     )
@@ -72,14 +73,14 @@ function ImageCarousel({similar, direct}: ImageCarouselProps) {
         >
             {similar.map((ad) => (
                 <TouchableOpacity key={ad.id.toString()} onPress={() => {handlePress(ad)}}>
-                    <View style={RelevantStyles.imageView}>
-                        <Text style={RelevantStyles.imageText}>
+                    <View style={SimilarStyles.imageView}>
+                        <Text style={SimilarStyles.imageText}>
                             {lang ? ad.title_no : ad.title_en}
                         </Text>
                         <BookmarkIcon id={ad.id} />
-                        <Text style={RelevantStyles.imageTextOpacity} />
+                        <Text style={SimilarStyles.imageTextOpacity} />
                         <Image 
-                            style={RelevantStyles.image}
+                            style={SimilarStyles.image}
                             source={{uri: ad.images[0]}} 
                         />
                     </View>

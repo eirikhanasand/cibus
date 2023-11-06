@@ -28,7 +28,6 @@ export default function Navigator(): JSX.Element {
     const [login, setLogin] = useState(false)
     
     const screens = [
-        { name: "AdScreen", component: AdScreen },
         {
             name: "LandingScreen",
             component: LandingScreen,
@@ -37,21 +36,13 @@ export default function Navigator(): JSX.Element {
             ? require("@assets/house.png")
             : require("@assets/house.png")
         },
-        {
-            name: "PlayScreen",
-            component: PlayScreen,
-            focusedIcon: require("@assets/plus-green.png"),
-            icon: value
-            ? require("@assets/plus.png")
-            : require("@assets/plus.png")
-        },
         { 
             name: "BookmarkScreen", 
             component: BookmarkScreen,
             focusedIcon: require("@assets/bookmark-green.png"),
             icon: value
-                ? require("@assets/bookmark.png")
-                : require("@assets/bookmark.png")
+            ? require("@assets/bookmark.png")
+            : require("@assets/bookmark.png")
         },
         {
             name: "CartScreen",
@@ -59,30 +50,22 @@ export default function Navigator(): JSX.Element {
             component: CartScreen,
             focusedIcon: require("@assets/cart-green.png"),
             icon: value
-                ? require("@assets/cart.png")
-                : require("@assets/cart.png")
+            ? require("@assets/cart.png")
+            : require("@assets/cart.png")
         },
-        {
-            name: "MenuScreen",
-            login: login,
-            component: MenuScreen,
-            focusedIcon: require("@assets/menu-green.png"),
-            icon: value
-                ? require("@assets/menu.png")
-                : require("@assets/menu.png")
-        },
+        { name: "AdScreen", component: AdScreen }
     ]
-
+    
     return (
         <Tab.Navigator
-            initialRouteName={screens[0].name}
-            backBehavior="history"
-            screenOptions={({
-                headerShown: true,
-                header: () => <Header />,
-            })}
-            tabBar={props => <Footer 
-                state={props.state} 
+        initialRouteName={screens[0].name}
+        backBehavior="history"
+        screenOptions={({
+            headerShown: true,
+            header: () => <Header />,
+        })}
+        tabBar={props => <Footer 
+            state={props.state} 
                 descriptors={props.descriptors} 
                 navigation={props.navigation} 
                 insets={props.insets} 

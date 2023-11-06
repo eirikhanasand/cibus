@@ -10,7 +10,6 @@ type ThemeProps = {
 // Screens available
 type RootStackParamList = {
     LandingScreen: any
-    PlayScreen: PlayScreenProps
     CartScreen: any
     MenuScreen: any
     AdScreen: any
@@ -22,10 +21,6 @@ type WelcomeProps = {
     setName: React.Dispatch<React.SetStateAction<string>>
     login: boolean
     setLogin: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-type PlayScreenProps = {
-    category: string
 }
 
 type ReduxState = {

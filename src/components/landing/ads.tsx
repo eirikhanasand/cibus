@@ -1,10 +1,10 @@
 import AdStyles from "@components/landing/adStyles"
 import { Text, TouchableOpacity, View } from "react-native"
 import { Card } from "@components/shared/default/defaultComponents"
-import { Navigation, ScreenProps } from "@interfaces"
 import { useDispatch, useSelector } from "react-redux"
 import { setAnimate } from "@redux/slices/animate"
-import { useNavigation } from "@react-navigation/native"
+import { setSearchHighlighted } from "@redux/slices/search"
+import { setClickedCategories } from "@redux/slices/categories"
 
 type AdContentProps = {
     titles: string[]
@@ -37,32 +37,63 @@ export default function Ads(): JSX.Element {
 
 function AdContent({titles}: AdContentProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const navigation: Navigation = useNavigation()
+    const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { clickedCategories } = useSelector((state: ReduxState) => state.category) 
+    const dispatch = useDispatch()
+
+    const klær = {
+        "title": "Klær",
+        "subcategories": [
+            "Genser",
+            "Bukser",
+            "Sko",
+            "T-skjorte",
+            "Kjole",
+            "Shorts"
+        ]
+    }
+
+    const clothes = {
+        "title": "Clothes",
+        "subcategories": [
+            "Sweater",
+            "Pants",
+            "Shoes",
+            "T-shirts",
+            "Dresses",
+            "Shorts"
+        ]
+    }
+
+    function handlePress() {
+        dispatch(setSearchHighlighted(true))
+        dispatch(setClickedCategories({
+            categories_no: lang ? [...clickedCategories.categories_no, klær] : clickedCategories.categories_no,
+            categories_en: !lang ? [...clickedCategories.categories_en, clothes] : clickedCategories.categories_en
+        }))
+    }
 
     if (titles.length === 3) {
         return (
             <View style={AdStyles.viewThree}>
-                {titles.map((title) => {
-                    return (
-                        <TouchableOpacity
-                            key={title}
-                            onPress={() => {navigation.navigate("PlayScreen", 
-                            {category: title})}}
-                            style={{
-                            ...AdStyles.touchableThree, 
+                {titles.map((title) => (
+                    <TouchableOpacity
+                        key={title}
+                        onPress={handlePress}
+                        style={{
+                        ...AdStyles.touchableThree, 
+                        backgroundColor: theme.green
+                        }}
+                    >
+                        <Text key={title} style={{
+                            ...AdStyles.textThree, 
+                            color: theme.contrast, 
                             backgroundColor: theme.green
-                            }}
-                        >
-                            <Text key={title} style={{
-                                ...AdStyles.textThree, 
-                                color: theme.contrast, 
-                                backgroundColor: theme.green
-                            }}>
-                                {title}
-                            </Text>
-                        </TouchableOpacity>
-                    )
-                })}
+                        }}>
+                            {title}
+                        </Text>
+                    </TouchableOpacity>
+                ))}
             </View>
         )
     } else {
@@ -71,8 +102,7 @@ function AdContent({titles}: AdContentProps): JSX.Element {
                 {titles.map((title) => (
                     <TouchableOpacity
                         key={title}
-                        onPress={() => {navigation.navigate("PlayScreen", 
-                            {category: title})}}
+                        onPress={handlePress}
                         style={{
                             ...AdStyles.touchableTwo, 
                             backgroundColor: theme.green

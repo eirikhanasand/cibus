@@ -20,7 +20,7 @@ export default function CategoryFilter() {
 
     function handleChecked(category: SubCatArray) {
         dispatch(setClickedCategories({
-            categories_no: lang ? [...clickedCategories.categories_no,, category] : clickedCategories.categories_no,
+            categories_no: lang ? [...clickedCategories.categories_no, category] : clickedCategories.categories_no,
             categories_en: !lang ? [...clickedCategories.categories_en, category] : clickedCategories.categories_en
         }))
     }

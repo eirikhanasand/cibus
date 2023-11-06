@@ -1,7 +1,6 @@
 import { SafeAreaView, ScrollView } from 'react-native'
 import { LandingStyles } from "@screens/landing/landingStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
-import Relevant from '@components/landing/relevant'
 import Welcome from '@components/landing/welcome'
 import Ads from '@components/landing/ads'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,6 +10,7 @@ import fetchAds from '@utils/fetchAds'
 import { setAds } from '@redux/slices/ad'
 import { setCategories } from '@redux/slices/categories'
 import fetchCategories from '@utils/fetchCategories'
+import Similar from '@components/cart/similar'
 
 export default function LandingScreen(): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
@@ -49,7 +49,7 @@ export default function LandingScreen(): JSX.Element {
                 <>
                     <Welcome />
                     <Ads />
-                    <Relevant />
+                    <Similar screen='landing' />
                 </>}
                 {highlighted && <AdList />}
             </ScrollView>

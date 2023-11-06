@@ -7,17 +7,15 @@ import { setTheme } from "@redux/slices/theme"
 import Filter from "@components/shared/filter/filter"
 import CategoryFilter from "@components/shared/filter/categoryFilter"
 import { setCategories } from "@redux/slices/categories"
-import { setFilter } from "@redux/slices/search"
+import { setFilter, setSearchHighlighted } from "@redux/slices/search"
 
 type IconValue = "globe" | "theme" | "filter"
 
 export default function Header(): JSX.Element {
-    const { name } = useSelector((state: ReduxState) => state.name)
-    const { login } = useSelector((state: ReduxState) => state.login)
     const { theme } = useSelector((state: ReduxState) => state.theme)
-    const logo = require("@assets/cibus.png")
+    const { highlighted } = useSelector((state: ReduxState) => state.search)
+    const dispatch = useDispatch()
     const gobackLogo = require("@assets/goback777.png")
-    const Name = name.length > 12 ? `${name.slice(0, 12)}...` : name
 
     // Get the navigation object
     const navigation = useNavigation()
@@ -39,7 +37,11 @@ export default function Header(): JSX.Element {
 
     // Function to go back
     function goBack(): void {
-        navigation.goBack()
+        if (highlighted) {
+            dispatch(setSearchHighlighted(false))
+        } else {
+            navigation.goBack()
+        }
     }
 
     // Allow the user to go back if they are inside a nested screen
@@ -58,21 +60,9 @@ export default function Header(): JSX.Element {
             }}>
             <View style={HeaderStyles.headerRow}>
                 {isNested() && <GobackView />}
-                {!name.length || !login
-                    ? <>
-                        <Filter />
-                        <HeaderIcons />
-                    </>
-                    : <>
-                        <View style={{flexDirection: "row"}}>
-                            <Image style={HeaderStyles.menuIcon} source={logo} />
-                            <Text style={{ ...HeaderStyles.logoWithItems, color: theme.contrast }}>
-                                Welcome, {Name}!
-                            </Text>
-                        </View>
-                        <HeaderIcons />
-                    </>
-                }
+                {highlighted && <GobackView />}
+                <Filter />
+                <HeaderIcons />
             </View>
         </View>
     )
