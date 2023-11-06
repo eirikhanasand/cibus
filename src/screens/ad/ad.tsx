@@ -14,7 +14,7 @@ export default function AdScreen(): JSX.Element {
             }}>
             <CustomStatusBar />
             <ScrollView showsVerticalScrollIndicator={false}>
-                {/* <Ad /> */}
+                <Ad />
             </ScrollView>
         </SafeAreaView>
     )

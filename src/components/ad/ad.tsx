@@ -21,8 +21,8 @@ export default function Ad() {
     const title = lang ? ad.title_no : ad.title_en
 
     return (
-        <View style={{top: 50}}>
-            <View style={{backgroundColor: theme.card, margin: 10, padding: 10, borderRadius: 10}}>
+        <View style={AdStyles.view}>
+            <View style={{...AdStyles.innerView, backgroundColor: theme.card}}>
                 <View style={{zIndex: 100}}>
                     <BookmarkIcon id={ad.id} />
                 </View>
@@ -31,7 +31,7 @@ export default function Ad() {
                     showsHorizontalScrollIndicator={false}
                     style={{marginBottom: 10}}
                 >
-                    {/* {ad.images.map((image) => <Image 
+                    {ad.images.map((image) => <Image 
                         key={image}
                         source={{uri: image}} 
                         style={{
@@ -42,7 +42,7 @@ export default function Ad() {
                             overflow: "hidden",
                             borderRadius: 15
                         }} 
-                    />)} */}
+                    />)}
                 </ScrollView>
                 <Text style={{color: theme.contrast, fontSize: 24, fontWeight: "600"}}>{title}</Text>
                 <Row left={lang ? "Pris" : "Price"} right={`${ad.price}`} />
@@ -65,8 +65,10 @@ function Contact() {
     const { theme } = useSelector((state: ReduxState) => state.theme)
 
     return (
-        <View style={{backgroundColor: theme.card, margin: 10, marginTop: 0, padding: 10, borderRadius: 10}}>
-            <Text style={{color: theme.contrast, fontSize: 20, marginBottom: 10, fontWeight: "600"}}>{lang ? "Selger" : "Seller"}:</Text>
+        <View style={{...AdStyles.contactView, backgroundColor: theme.card}}>
+            <Text style={{color: theme.contrast, fontSize: 20, marginBottom: 10, fontWeight: "600"}}>
+                {lang ? "Selger" : "Seller"}:
+            </Text>
             <Row left="ID" right={`${ad.seller.id}`} />
             <Row left={lang ? "Navn" : "Name"} right={`${ad.seller.name}`} />
             <Row left={lang ? "Tlf" : "Phone"} right={`${ad.seller.phone}`} />

@@ -19,6 +19,20 @@ const AdStyles = StyleSheet.create({
     actionText: {
         fontSize: 20, 
         fontWeight: "600"
+    },
+    contactView: {
+        margin: 10, 
+        marginTop: 0, 
+        padding: 10, 
+        borderRadius: 10
+    },
+    view: {
+        top: 50
+    },
+    innerView: {
+        margin: 10,
+        padding: 10, 
+        borderRadius: 10
     }
 })
 

@@ -5,6 +5,8 @@ import getSimilar from "@utils/getSimilar"
 import { setCart } from "@redux/slices/cart"
 import BookmarkIcon from "@components/bookmarks/bookmarkIcon"
 import { setAd } from "@redux/slices/ad"
+import { Navigation } from "@interfaces"
+import { useNavigation } from "@react-navigation/native"
 
 type SimilarProps = {
     screen: string
@@ -58,10 +60,16 @@ export default function Similar({screen}: SimilarProps): JSX.Element {
 function ImageCarousel({similar, direct}: ImageCarouselProps) {
     const { cart } = useSelector((state: ReduxState) => state.cart)
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const navigation: Navigation = useNavigation()
     const dispatch = useDispatch()
 
     function handlePress(ad: Ad) {
-        direct ? dispatch(setCart([...cart, ad.id])) : dispatch(setAd(ad))
+        if (direct) {
+            dispatch(setCart([...cart, ad.id]))
+        } else {
+            dispatch(setAd(ad))
+            navigation.navigate('AdScreen')
+        }
     }
     
     return (
