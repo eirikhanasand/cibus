@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import LandingScreen from '@screens/landing/landing'
-import StatsScreen from '@screens/stats/stats'
+import CartScreen from '@screens/cart/cart'
 import { ImageProps } from "react-native"
 import MenuScreen from '@screens/menu/menu'
 import PlayScreen from '@screens/categories/play'
@@ -11,6 +11,7 @@ import Header from '@nav/header'
 import React from "react"
 import { useSelector } from 'react-redux'
 import AdScreen from '@screens/ad/ad'
+import BookmarkScreen from '@screens/bookmarks/bookmarks'
 
 type TabProps = {
     name: string
@@ -33,25 +34,33 @@ export default function Navigator(): JSX.Element {
             component: LandingScreen,
             focusedIcon: require("@assets/house-green.png"),
             icon: value
-                ? require("@assets/house.png")
-                : require("@assets/house.png")
+            ? require("@assets/house.png")
+            : require("@assets/house.png")
         },
         {
             name: "PlayScreen",
             component: PlayScreen,
             focusedIcon: require("@assets/plus-green.png"),
             icon: value
-                ? require("@assets/plus.png")
-                : require("@assets/plus.png")
+            ? require("@assets/plus.png")
+            : require("@assets/plus.png")
+        },
+        { 
+            name: "BookmarkScreen", 
+            component: BookmarkScreen,
+            focusedIcon: require("@assets/bookmark-green.png"),
+            icon: value
+                ? require("@assets/bookmark.png")
+                : require("@assets/bookmark.png")
         },
         {
-            name: "StatsScreen",
+            name: "CartScreen",
             login: login,
-            component: StatsScreen,
-            focusedIcon: require("@assets/stats-green.png"),
+            component: CartScreen,
+            focusedIcon: require("@assets/cart-green.png"),
             icon: value
-                ? require("@assets/stats.png")
-                : require("@assets/stats.png")
+                ? require("@assets/cart.png")
+                : require("@assets/cart.png")
         },
         {
             name: "MenuScreen",

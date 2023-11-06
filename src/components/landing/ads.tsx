@@ -12,18 +12,20 @@ type AdContentProps = {
 
 export default function Ads(): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const navigation: Navigation = useNavigation()
+    const dispatch = useDispatch()
+    dispatch(setAnimate(true))
+
     const titlesNO = {
         two: ["Gensere", "Bukser"],
         three: ["Sko", "T-skjorter", "Alle klær"]
     }
+
     const titlesEN = {
         two: ["Sweaters", "Pants"],
         three: ["Shoes", "Shirts", "All clothes"]
     }
+
     const titles = lang ? titlesNO : titlesEN
-    const dispatch = useDispatch()
-    dispatch(setAnimate(true))
     
     return (
         <Card title={lang ? "Klær" : "Clothes"}>

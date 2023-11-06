@@ -11,7 +11,7 @@ type ThemeProps = {
 type RootStackParamList = {
     LandingScreen: any
     PlayScreen: PlayScreenProps
-    StatsScreen: any
+    CartScreen: any
     MenuScreen: any
     AdScreen: any
 }
@@ -68,10 +68,16 @@ type Ad = {
     id: number
     title_no: string
     title_en: string
-    price: number
+    description_no: string
+    description_en: string
+    category_no: string
+    category_en: string
+    subcategory_no: string
+    subcategory_en: string
     location: string
+    price: number
     seller: Seller
-    image: string
+    images: string[]
 }
 
 type Seller = {

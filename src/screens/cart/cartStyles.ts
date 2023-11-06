@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native'
 
-export const LoginStyles = StyleSheet.create({
-    // Content of the login overlay
+export const CartStyles = StyleSheet.create({
+    // Content of the cart page
     content: {
         flex: 1,
         justifyContent: "center"
     },
 })
+
+export default CartStyles
