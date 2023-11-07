@@ -39,8 +39,8 @@ export default function Similar({screen}: SimilarProps): JSX.Element {
             && !similar.some((item) => item.id === ads[i].id) 
             && ads[i].id !== ad.id) {
             similar.push(ads[i]);
-            similarTwo.push(ads[i + 5])
-            similarThree.push(ads[i + 10])
+            similarTwo.push(ads[i + 6])
+            similarThree.push(ads[i + 12])
         }
         i++
     }
