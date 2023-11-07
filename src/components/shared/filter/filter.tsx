@@ -22,7 +22,7 @@ export default function Filter() {
     return (
         <TextInput
             ref={textInputRef}
-            style={{...filterStyles.parent, backgroundColor: theme.content, left: highlighted ? -10 : 0,  paddingLeft: highlighted ? 0 : 10, color: theme.contrast, width: highlighted ? Dimensions.get('window').width / 1.4 : Dimensions.get('window').width / 1.5}}
+            style={{...filterStyles.parent, backgroundColor: theme.content, left: highlighted ? -10 : 0,  paddingLeft: 10, color: theme.contrast, width: highlighted ? Dimensions.get('window').width / 1.4 : Dimensions.get('window').width / 1.5}}
             maxLength={40}
             placeholder={lang ? "Søk.." : "Search.."}
             placeholderTextColor={theme.contrast}
