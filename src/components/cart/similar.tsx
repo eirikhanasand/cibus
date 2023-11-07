@@ -28,7 +28,7 @@ export default function Similar({screen}: SimilarProps): JSX.Element {
     const { cart } = useSelector((state: ReduxState) => state.cart)
     const itemsInCart = ads.filter((ad) => cart.includes(ad.id))
     let similar = getSimilar(itemsInCart, lang)
-    const doubleCarousel = screen !== 'ad'
+    const doubleCarousel = screen === 'landing'
     const top = screen === 'cart' ? cart.length ? 50 : 25 : 0
     const similarTwo = [...similar]
     const similarThree = [...similar]
@@ -51,7 +51,7 @@ export default function Similar({screen}: SimilarProps): JSX.Element {
                 {lang ? "Anbefalt" : "Recommended"}
             </Text>
             <ImageCarousel similar={similar} direct={screen === 'cart' && true} />
-            {!cart.length && doubleCarousel && <ImageCarousel similar={similarTwo} direct={screen === 'cart' && true} />}
+            {(!cart.length || doubleCarousel) && <ImageCarousel similar={similarTwo} direct={screen === 'cart' && true} />}
             {!cart.length && screen === 'cart' && <ImageCarousel similar={similarThree} direct={screen === 'cart' && true} />}
         </View>
     )
