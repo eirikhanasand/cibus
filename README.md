@@ -4,6 +4,12 @@
 ### Project description
 Cibus is a marketplace where users can buy items. The items are provided as lists with images, bookmark options and cart interaction methods to provide a seamless user experience. The focus of the application is on the display of the items. Therefore, the app does not edit the endpoint at any point. The reason this is implemented is due to it requiring both a CDN handler for images, and image upload feature, which would increase the time complexity of the application significantly, as explained in the limitations section. The user can checkout items and buy them, but there is no payment logic.
 
+### Run application
+1. Install all necesarry dependencies by `npm install`
+2. Install pods (iOS) by `cd ios && pod install && cd ..`
+3. Run the application by `npm start`
+4. Press `i` or `a` depending on what device you are running on.
+
 ### Features
 - View items
 - Bookmark items
