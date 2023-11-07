@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { setLang } from "@redux/slices/lang"
 import { setTheme } from "@redux/slices/theme"
 import Filter from "@components/shared/filter/filter"
-import CategoryFilter from "@components/shared/filter/categoryFilter"
-import { setCategories } from "@redux/slices/categories"
 import { setFilter, setSearchHighlighted } from "@redux/slices/search"
+import { Navigation } from "@interfaces"
 
 type IconValue = "globe" | "theme" | "filter"
 
@@ -16,20 +15,13 @@ export default function Header(): JSX.Element {
     const { highlighted } = useSelector((state: ReduxState) => state.search)
     const dispatch = useDispatch()
     const gobackLogo = require("@assets/goback777.png")
-
-    // Get the navigation object
-    const navigation = useNavigation()
-        
-    // Get the route object
+    const navigation: Navigation = useNavigation()
     const route = useRoute()
 
     // Check if the active screen is nested
     function isNested(): boolean {
-
-        // All nested routes will be added here as they are implemented
         switch (route.name) {
-            case "LuckspinScreen": return true
-            case "JackpotScreen": return true
+            case "AdScreen": return true
         }
 
         return false
@@ -37,11 +29,7 @@ export default function Header(): JSX.Element {
 
     // Function to go back
     function goBack(): void {
-        if (highlighted) {
-            dispatch(setSearchHighlighted(false))
-        } else {
-            navigation.goBack()
-        }
+        highlighted ? dispatch(setSearchHighlighted(false)) : navigation.goBack()
     }
 
     // Allow the user to go back if they are inside a nested screen
@@ -61,7 +49,7 @@ export default function Header(): JSX.Element {
             <View style={HeaderStyles.headerRow}>
                 {isNested() && <GobackView />}
                 {highlighted && <GobackView />}
-                <Filter />
+                {!isNested() && <Filter />}
                 <HeaderIcons />
             </View>
         </View>
@@ -104,14 +92,22 @@ function HeaderIcon({type}: {type: IconValue}) {
     const icon = type === "globe" ? langIcon : type === "theme" ? themeIcon : filterIcon
 
     function handlePress() {
-        type === "globe" ? dispatch(setLang()) : type === "theme" ? dispatch(setTheme()) : dispatch(setFilter())
+        if (type === 'globe') {
+            dispatch(setLang())
+        } else if (type === 'theme') {
+            dispatch(setTheme())
+        } else {
+            dispatch(setFilter())
+        }
     }
 
     return (
         <TouchableOpacity onPress={handlePress}>
             <View style={{flexDirection: "row"}}>
                 <Image style={HeaderStyles.menu} source={icon} />
-                {type === "globe" && <Text style={{color: theme.contrast, fontSize: 20, left: -20, top: 4}}>{lang ? "en" : "no"}</Text>}
+                {type === "globe" && <Text style={{color: theme.contrast, fontSize: 20, left: -20, top: 4}}>
+                    {lang ? "en" : "no"}
+                </Text>}
             </View>
         </TouchableOpacity>
     )

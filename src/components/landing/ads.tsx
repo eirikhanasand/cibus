@@ -2,7 +2,6 @@ import AdStyles from "@components/landing/adStyles"
 import { Text, TouchableOpacity, View } from "react-native"
 import { Card } from "@components/shared/default/defaultComponents"
 import { useDispatch, useSelector } from "react-redux"
-import { setAnimate } from "@redux/slices/animate"
 import { setSearchHighlighted } from "@redux/slices/search"
 import { setClickedCategories } from "@redux/slices/categories"
 
@@ -12,8 +11,6 @@ type AdContentProps = {
 
 export default function Ads(): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
-    const dispatch = useDispatch()
-    dispatch(setAnimate(true))
 
     const titlesNO = {
         two: ["Gensere", "Bukser"],

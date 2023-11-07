@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native"
 
 export const HeaderStyles = StyleSheet.create({
-    // Menu icon in header
     menu: {
         width: 35,
         height: 35,
@@ -21,7 +20,6 @@ export const HeaderStyles = StyleSheet.create({
         alignSelf: 'center',
         left: 10,
     },
-    // Text logo in header
     logo: {
         fontSize: 28,
         fontWeight: "700",
@@ -35,7 +33,6 @@ export const HeaderStyles = StyleSheet.create({
         marginLeft: "4%",
         justifyContent: 'center'
     },
-    // Background of header
     headerContent: {
         position: "absolute",
         width: "100%",
@@ -44,7 +41,6 @@ export const HeaderStyles = StyleSheet.create({
         zIndex: 1,
         top: 0,
     },
-    // Row to horizontally align content of the header
     headerRow: {
         flexDirection: "row", 
         justifyContent: "space-between",

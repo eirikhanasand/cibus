@@ -1,8 +1,8 @@
-import { Dimensions, TextInput } from "react-native";
+import { Dimensions, TextInput } from "react-native"
 import filterStyles from "./filterStyles"
-import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSearch, setSearchHighlighted } from "@redux/slices/search";
+import { useRef } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setSearch, setSearchHighlighted } from "@redux/slices/search"
 
 export default function Filter() {
     const textInputRef = useRef<TextInput>(null)

@@ -1,5 +1,3 @@
-import { Navigation } from "@interfaces";
-import { useNavigation } from "@react-navigation/native";
 import { setCart } from "@redux/slices/cart";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";

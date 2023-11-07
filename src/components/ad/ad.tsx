@@ -1,9 +1,16 @@
-import { Dimensions, Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import AdStyles from "./adStyles"
 import BookmarkIcon from "@components/bookmarks/bookmarkIcon"
 import { setCart } from "@redux/slices/cart"
 import Similar from "@components/cart/similar"
+import { 
+    Dimensions, 
+    Image, 
+    ScrollView, 
+    Text, 
+    TouchableOpacity, 
+    View 
+} from "react-native"
 
 type RowProps = {
     left: string

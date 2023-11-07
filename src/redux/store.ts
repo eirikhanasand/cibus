@@ -1,9 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { persistReducer } from "redux-persist"
-import AnimateReducer from "./slices/animate"
-import NameReducer from "./slices/name"
-import LoginReducer from "./slices/login"
 import ThemeReducer from "./slices/theme"
 import thunk from "redux-thunk"
 import LangReducer from "./slices/lang"
@@ -15,9 +12,6 @@ import SearchReducer from "./slices/search"
 
 // Combines all reducers
 const reducers = combineReducers({
-    animate: AnimateReducer,
-    name: NameReducer,
-    login: LoginReducer,
     lang: LangReducer,
     theme: ThemeReducer,
     ad: AdReducer,
@@ -31,7 +25,7 @@ const reducers = combineReducers({
 const saveState = {
     key: "root",
     storage: AsyncStorage,
-    whitelist: ["animate", "name", "login", "theme", "lang", "search", "ad", "category", "bookmarks", "cart"]
+    whitelist: ["theme", "lang", "search", "ad", "category", "bookmarks", "cart"]
 }
 
 // Persistor to remember the state

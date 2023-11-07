@@ -4,7 +4,6 @@ import CartScreen from '@screens/cart/cart'
 import { ImageProps } from "react-native"
 import { TabOptions } from '@interfaces'
 import Footer from "@nav/footer"
-import { useState } from 'react'
 import Header from '@nav/header'
 import React from "react"
 import { useSelector } from 'react-redux'
@@ -21,9 +20,7 @@ type TabProps = {
 const Tab = createBottomTabNavigator()
 
 export default function Navigator(): JSX.Element {
-    const { name } = useSelector((state: ReduxState) => state.name)
     const { value } = useSelector((state: ReduxState) => state.theme)
-    const [login, setLogin] = useState(false)
     
     const screens = [
         {
@@ -44,7 +41,6 @@ export default function Navigator(): JSX.Element {
         },
         {
             name: "CartScreen",
-            login: login,
             component: CartScreen,
             focusedIcon: require("@assets/cart-green.png"),
             icon: value

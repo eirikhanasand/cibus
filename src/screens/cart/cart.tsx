@@ -13,9 +13,9 @@ export default function CartScreen(): JSX.Element {
 
     return (
         <SafeAreaView style={{
-                ...CartStyles.content, 
-                backgroundColor: theme.content
-            }}>
+            ...CartStyles.content, 
+            backgroundColor: theme.content
+        }}>
             <CustomStatusBar />
             <ScrollView showsVerticalScrollIndicator={false}>
                 {!highlighted && <>

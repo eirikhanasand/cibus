@@ -1,7 +1,6 @@
 import { SafeAreaView, ScrollView } from 'react-native'
 import { LandingStyles } from "@screens/landing/landingStyles"
 import CustomStatusBar from '@components/shared/default/defaultComponents'
-import Welcome from '@components/landing/welcome'
 import Ads from '@components/landing/ads'
 import { useDispatch, useSelector } from 'react-redux'
 import AdList from '@components/landing/adList'
@@ -47,7 +46,6 @@ export default function LandingScreen(): JSX.Element {
             <ScrollView showsVerticalScrollIndicator={false}>
                 {!highlighted &&
                 <>
-                    <Welcome />
                     <Ads />
                     <Similar screen='landing' />
                 </>}

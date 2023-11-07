@@ -1,4 +1,3 @@
-// Theme colors available
 type ThemeProps = {
     content: string
     card: string
@@ -7,33 +6,14 @@ type ThemeProps = {
     green: string
 }
 
-// Screens available
 type RootStackParamList = {
     LandingScreen: any
+    BookmarkScreen: any
     CartScreen: any
-    MenuScreen: any
     AdScreen: any
 }
 
-// Props for the Welcome component
-type WelcomeProps = {
-    name: string
-    setName: React.Dispatch<React.SetStateAction<string>>
-    login: boolean
-    setLogin: React.Dispatch<React.SetStateAction<boolean>>
-}
-
 type ReduxState = {
-    animate: {
-        animate: boolean
-    }
-    name: {
-        name: string
-    }
-    login: {
-        login: boolean
-        displayLogin: boolean
-    }
     theme: {
         value: boolean
         theme: Theme

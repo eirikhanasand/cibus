@@ -1,7 +1,7 @@
-import { Dimensions, FlatList, TouchableOpacity, View, Text } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { CheckBox, CheckedBox, SmallCheck } from "./check";
-import { setClickedCategories } from "@redux/slices/categories";
+import { Dimensions, FlatList, TouchableOpacity, View, Text } from "react-native"
+import { useDispatch, useSelector } from "react-redux"
+import { CheckBox, CheckedBox, SmallCheck } from "./check"
+import { setClickedCategories } from "@redux/slices/categories"
 
 export default function CategoryFilter() {
     const { category, clickedCategories } = useSelector((state: ReduxState) => state.category)
