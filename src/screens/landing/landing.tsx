@@ -43,7 +43,7 @@ export default function LandingScreen(): JSX.Element {
                 backgroundColor: theme.content
             }}>
             <CustomStatusBar />
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} style={{marginTop: highlighted ? -20 : 50}}>
                 {!highlighted &&
                 <>
                     <Ads />

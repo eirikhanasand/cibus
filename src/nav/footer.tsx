@@ -4,6 +4,7 @@ import { View, Image, TouchableOpacity } from 'react-native'
 import FooterStyles from '@nav/footerStyles'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSearchHighlighted } from '@redux/slices/search'
+import { resetClicked } from '@redux/slices/categories'
 
 export default function Footer({ state, descriptors, navigation }: FooterProps): 
 JSX.Element {
@@ -28,6 +29,7 @@ JSX.Element {
                         canPreventDefault: true,
                     })
 
+                    dispatch(resetClicked())
                     dispatch(setSearchHighlighted(false))
                     if (!isFocused && !event.defaultPrevented) {
                         navigation.navigate(route.name, {merge: true})

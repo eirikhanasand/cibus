@@ -23,11 +23,17 @@ export const CategorySlice = createSlice({
         setClickedCategories(state, action) {
             state.clickedCategories = action.payload
         },
+        resetClicked(state) {
+            state.clickedCategories = {
+                categories_no: [],
+                categories_en: []
+            }
+        }
     }
 })
 
 // Exports the change function
-export const { setCategories, setClickedCategories } = CategorySlice.actions
+export const { setCategories, setClickedCategories, resetClicked } = CategorySlice.actions
 
 // Exports the lang slice
 export default CategorySlice.reducer

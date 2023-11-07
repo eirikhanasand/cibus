@@ -14,11 +14,12 @@ export default function AdList() {
     const clicked_en = clickedCategories.categories_en.map((category) =>  category.title)
     const categoryFiltered = ads.filter((ad) => clicked_no.includes(ad.category_no) || clicked_en.includes(ad.category_en))
     const cats = categoryFiltered.length ? categoryFiltered : ads
+    const displayed = cats.filter((ad) => ad.title_no.includes(input) || ad.title_en.includes(input))
 
     return (
-        <View style={{top: 60}}>
+        <View style={{top: 60, marginBottom: 100}}>
             {filter && <CategoryFilter />}
-            {cats.filter((ad) => ad.title_no.includes(input) || ad.title_en.includes(input)).map((ad) => <Ad key={ad.id} ad={ad}/>)}
+            {displayed.map((ad) => <Ad key={ad.id} ad={ad}/>)}
         </View>
     )
 }

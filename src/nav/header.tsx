@@ -7,6 +7,7 @@ import { setTheme } from "@redux/slices/theme"
 import Filter from "@components/shared/filter/filter"
 import { setFilter, setSearchHighlighted } from "@redux/slices/search"
 import { Navigation } from "@interfaces"
+import { resetClicked } from "@redux/slices/categories"
 
 type IconValue = "globe" | "theme" | "filter"
 
@@ -29,7 +30,12 @@ export default function Header(): JSX.Element {
 
     // Function to go back
     function goBack(): void {
-        highlighted ? dispatch(setSearchHighlighted(false)) : navigation.goBack()
+        if (highlighted) {
+            dispatch(resetClicked())
+            dispatch(setSearchHighlighted(false))
+        } else {
+            navigation.goBack()
+        }
     }
 
     // Allow the user to go back if they are inside a nested screen
@@ -93,6 +99,7 @@ function HeaderIcon({type}: {type: IconValue}) {
 
     function handlePress() {
         if (type === 'globe') {
+            dispatch(resetClicked())
             dispatch(setLang())
         } else if (type === 'theme') {
             dispatch(setTheme())

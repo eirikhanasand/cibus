@@ -6,88 +6,68 @@ import { setSearchHighlighted } from "@redux/slices/search"
 import { setClickedCategories } from "@redux/slices/categories"
 
 type AdContentProps = {
-    titles: string[]
+    items: SubCatArray[]
+    hasAll?: boolean
 }
 
 export default function Ads(): JSX.Element {
     const { lang } = useSelector((state: ReduxState) => state.lang)
+    const { category } = useSelector((state: ReduxState) => state.category)
+    const catTwo = lang 
+        ? category.categories_no.slice(0, 2) 
+        : category.categories_en.slice(0, 2)
 
-    const titlesNO = {
-        two: ["Gensere", "Bukser"],
-        three: ["Sko", "T-skjorter", "Alle klær"]
-    }
+    const catThree = lang 
+    ? category.categories_no.slice(2, 4)
+    : category.categories_en.slice(2, 4)
 
-    const titlesEN = {
-        two: ["Sweaters", "Pants"],
-        three: ["Shoes", "Shirts", "All clothes"]
-    }
-
-    const titles = lang ? titlesNO : titlesEN
-    
     return (
-        <Card title={lang ? "Klær" : "Clothes"}>
-            <AdContent titles={titles.two} />
-            <AdContent titles={titles.three} />
+        <Card title={lang ? "Kategorier" : "Categories"}>
+            <AdContent items={catTwo} />
+            <AdContent items={catThree} hasAll={true} />
         </Card>
     )
 }
 
-function AdContent({titles}: AdContentProps): JSX.Element {
+function AdContent({items, hasAll}: AdContentProps): JSX.Element {
     const { theme } = useSelector((state: ReduxState) => state.theme)
     const { lang } = useSelector((state: ReduxState) => state.lang)
     const { clickedCategories } = useSelector((state: ReduxState) => state.category) 
     const dispatch = useDispatch()
 
-    const klær = {
-        "title": "Klær",
-        "subcategories": [
-            "Genser",
-            "Bukser",
-            "Sko",
-            "T-skjorte",
-            "Kjole",
-            "Shorts"
-        ]
+    const All: SubCatArray = {
+        title: lang ? "Vis flere" : "Show more",
+        subcategories: []
     }
 
-    const clothes = {
-        "title": "Clothes",
-        "subcategories": [
-            "Sweater",
-            "Pants",
-            "Shoes",
-            "T-shirts",
-            "Dresses",
-            "Shorts"
-        ]
-    }
+    if (hasAll) items.push(All)
 
-    function handlePress() {
+    function handlePress(item: SubCatArray) {
         dispatch(setSearchHighlighted(true))
         dispatch(setClickedCategories({
-            categories_no: lang ? [...clickedCategories.categories_no, klær] : clickedCategories.categories_no,
-            categories_en: !lang ? [...clickedCategories.categories_en, clothes] : clickedCategories.categories_en
+            categories_no: lang ? [...clickedCategories.categories_no, item] : clickedCategories.categories_no,
+            categories_en: !lang ? [...clickedCategories.categories_en, item] : clickedCategories.categories_en
         }))
     }
 
-    if (titles.length === 3) {
+    if (hasAll) {
         return (
             <View style={AdStyles.viewThree}>
-                {titles.map((title) => (
+                {items.map((item) => (
                     <TouchableOpacity
-                        key={title}
-                        onPress={handlePress}
+                        key={item.title}
+                        onPress={() => handlePress(item)}
                         style={{
                         ...AdStyles.touchableThree, 
                         backgroundColor: theme.green
                         }}
                     >
-                        <Text key={title} style={{
+                        <Text key={item.title} style={{
                             ...AdStyles.textThree, 
                             color: theme.contrast, 
                             backgroundColor: theme.green
                         }}>
-                            {title}
+                            {item.title}
                         </Text>
                     </TouchableOpacity>
                 ))}
@@ -96,21 +76,21 @@ function AdContent({titles}: AdContentProps): JSX.Element {
     } else {
         return (
             <View style={AdStyles.viewTwo}>
-                {titles.map((title) => (
+                {items.map((item) => (
                     <TouchableOpacity
-                        key={title}
-                        onPress={handlePress}
+                        key={item.title}
+                        onPress={() => handlePress(item)}
                         style={{
                             ...AdStyles.touchableTwo, 
                             backgroundColor: theme.green
                         }}
                     >
-                        <Text key={title} style={{
+                        <Text key={item.title} style={{
                             ...AdStyles.textTwo, 
                             color: theme.contrast, 
                             backgroundColor: theme.green
                         }}>
-                            {title}
+                            {item.title}
                         </Text>
                     </TouchableOpacity>
                 ))}
